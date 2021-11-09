@@ -14,12 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Hive Academy',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
+      darkTheme: ThemeData.dark(),
       home: SplashScreenView(
-        duration: 6000,
+        duration: 4000,
         imageSize: 400,
         navigateRoute: const OnboardingView(),
         imageSrc: "assets/images/hiveLogo.png",
