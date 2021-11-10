@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hive Academy',
       theme: ThemeData(
+        primaryColor: Colors.orange,
         primarySwatch: Colors.orange,
       ),
       darkTheme: ThemeData.dark(),

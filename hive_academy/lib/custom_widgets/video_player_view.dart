@@ -37,6 +37,8 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
       ),
       floatingActionButton: Container(
         alignment: Alignment.center,
+        margin: const EdgeInsets.only(left: 20),
+        width: MediaQuery.of(context).size.width,
         child: FloatingActionButton(
           onPressed: () {
             setState(() {
