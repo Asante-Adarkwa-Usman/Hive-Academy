@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_academy/custom_widgets/primary_button.dart';
 import 'package:hive_academy/custom_widgets/video_player_view.dart';
 import 'package:hive_academy/views/auth/login_view.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
@@ -97,8 +98,8 @@ class _OnboardingViewState extends State<OnboardingView> {
               children: _carouselTextList.map((e) {
                 int index = _carouselTextList.indexOf(e);
                 return Container(
-                  width: 10,
-                  height: 10,
+                  width: 12,
+                  height: 12,
                   margin:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 2.0),
                   decoration: BoxDecoration(
@@ -109,7 +110,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 120),
             Container(
               margin: const EdgeInsets.only(left: 30),
               child: Column(
@@ -125,23 +126,17 @@ class _OnboardingViewState extends State<OnboardingView> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const LoginView()));
-                        },
-                        child: const Text('Login',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
-                  ),
+                  PrimaryButton(
+                      buttonColor: Theme.of(context).primaryColor,
+                      text: 'Login',
+                      textColor: Colors.white,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginView()),
+                        );
+                      }),
                   const SizedBox(height: 10),
                   Container(
                     margin: const EdgeInsets.only(right: 30),
@@ -175,23 +170,17 @@ class _OnboardingViewState extends State<OnboardingView> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const RegisterView()));
-                        },
-                        child: Text('Join Us',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).primaryColor))),
-                  ),
+                  PrimaryButton(
+                      buttonColor: Colors.white,
+                      textColor: Theme.of(context).primaryColor,
+                      text: 'Join Us',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterView()),
+                        );
+                      }),
                 ],
               ),
             ),
