@@ -40,9 +40,12 @@ class _LoginViewState extends State<LoginView> {
                     Container(
                       alignment: Alignment.centerLeft,
                       margin: const EdgeInsets.only(left: 40),
-                      child: Text(
+                      child: const Text(
                         'Welcome',
-                        style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(120, 120, 120, 1)),
                       ),
                     ),
                     const SizedBox(height: 20),

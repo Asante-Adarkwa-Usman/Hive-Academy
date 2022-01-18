@@ -56,136 +56,136 @@ class _OnboardingViewState extends State<OnboardingView> {
           fit: BoxFit.cover,
         ),
       ),
-      child: SizedBox(
-        // height: 500,
-        child: ListView(
-          children: [
-            const SizedBox(height: 300, child: VideoPlayerView()),
-            const InkWell(
-              onTap: null,
-              child: Text(
-                'Take Video Course',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(254, 156, 4, 1),
+      child: ListView(
+        children: [
+          SizedBox(
+              height: 250,
+              width: 200,
+              child: Image.asset('assets/images/controller.png')),
+          const SizedBox(height: 20),
+          const InkWell(
+            onTap: null,
+            child: Text(
+              'Take Video Course',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(254, 156, 4, 1),
+              ),
+            ),
+          ),
+          //The Carousel
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: CarouselSlider(
+              carouselController: _carouselController,
+              items: _carouselTextList,
+              options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  height: MediaQuery.of(context).size.height * 0.09,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 7),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 900),
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  }),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _carouselTextList.map((e) {
+              int index = _carouselTextList.indexOf(e);
+              return Container(
+                width: 12,
+                height: 12,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _current == index
+                        ? const Color.fromRGBO(254, 156, 4, 1)
+                        : const Color.fromRGBO(0, 0, 0, .2)),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 80),
+          Container(
+            margin: const EdgeInsets.only(left: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Kindly Choose One',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromRGBO(150, 160, 160, 1),
+                  ),
                 ),
-              ),
-            ),
-            //The Carousel
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              child: CarouselSlider(
-                carouselController: _carouselController,
-                items: _carouselTextList,
-                options: CarouselOptions(
-                    enlargeCenterPage: true,
-                    height: MediaQuery.of(context).size.height * 0.09,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 7),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 900),
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
+                const SizedBox(height: 10),
+                PrimaryButton(
+                    buttonColor: Theme.of(context).primaryColor,
+                    text: 'Login',
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginView()),
+                      );
                     }),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: _carouselTextList.map((e) {
-                int index = _carouselTextList.indexOf(e);
-                return Container(
-                  width: 12,
-                  height: 12,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 2.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _current == index
-                          ? const Color.fromRGBO(254, 156, 4, 1)
-                          : const Color.fromRGBO(0, 0, 0, .3)),
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 120),
-            Container(
-              margin: const EdgeInsets.only(left: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Kindly Choose One',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.normal,
-                      color: Color.fromRGBO(150, 160, 160, 1),
-                    ),
+                const SizedBox(height: 10),
+                Container(
+                  margin: const EdgeInsets.only(right: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Container(
+                          height: 1.5,
+                          width: 90.0,
+                          color: const Color.fromRGBO(167, 167, 167, 1),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                        child: Text('Or',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Color.fromRGBO(167, 167, 167, 1))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Container(
+                          height: 1.5,
+                          width: 90.0,
+                          color: const Color.fromRGBO(167, 167, 167, 1),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  PrimaryButton(
-                      buttonColor: Theme.of(context).primaryColor,
-                      text: 'Login',
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginView()),
-                        );
-                      }),
-                  const SizedBox(height: 10),
-                  Container(
-                    margin: const EdgeInsets.only(right: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Container(
-                            height: 1.5,
-                            width: 90.0,
-                            color: const Color.fromRGBO(167, 167, 167, 1),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                          child: Text('Or',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Color.fromRGBO(167, 167, 167, 1))),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Container(
-                            height: 1.5,
-                            width: 90.0,
-                            color: const Color.fromRGBO(167, 167, 167, 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  PrimaryButton(
-                      buttonColor: Colors.white,
-                      textColor: Theme.of(context).primaryColor,
-                      text: 'Join Us',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegisterView()),
-                        );
-                      }),
-                ],
-              ),
+                ),
+                const SizedBox(height: 10),
+                PrimaryButton(
+                    buttonColor: Colors.white,
+                    textColor: Theme.of(context).primaryColor,
+                    text: 'Join Us',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterView()),
+                      );
+                    }),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     ));
   }
