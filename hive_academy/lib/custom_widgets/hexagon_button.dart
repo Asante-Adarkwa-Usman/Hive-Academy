@@ -4,9 +4,11 @@ import 'package:hexagon/hexagon.dart';
 class HexagonButton extends StatelessWidget {
   final IconData? icon;
   final Color? color;
+  final Color? iconColor;
   final void Function()? onTap;
 
-  const HexagonButton({Key? key, this.icon, this.color, this.onTap})
+  const HexagonButton(
+      {Key? key, this.icon, this.color, this.iconColor, this.onTap})
       : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class HexagonButton extends StatelessWidget {
           elevation: 8,
           child: Icon(
             icon,
-            color: Colors.white,
+            color: iconColor ?? Colors.white,
             size: 26,
           ),
         ),
