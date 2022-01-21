@@ -3,6 +3,8 @@ import 'package:hive_academy/custom_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
 
+import '../parent_view.dart';
+
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 
@@ -89,12 +91,12 @@ class _LoginViewState extends State<LoginView> {
                   // const SizedBox(height: 20),
                   PrimaryButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const RegisterView()));
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const ParentView()),
+                          (route) => false);
                     },
                     text: 'Login',
-                    textColor: Colors.white,
-                    buttonColor: Theme.of(context).primaryColor,
                   ),
                   const SizedBox(height: 5),
                   Container(

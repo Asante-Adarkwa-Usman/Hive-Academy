@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_academy/home_view.dart';
+import 'package:hive_academy/views/parent_view.dart';
 import 'package:hive_academy/views/auth/onboarding_view.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 

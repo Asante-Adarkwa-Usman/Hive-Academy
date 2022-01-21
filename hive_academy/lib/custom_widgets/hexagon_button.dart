@@ -5,10 +5,18 @@ class HexagonButton extends StatelessWidget {
   final IconData? icon;
   final Color? color;
   final Color? iconColor;
+  final double? width;
+  final Widget? child;
   final void Function()? onTap;
 
   const HexagonButton(
-      {Key? key, this.icon, this.color, this.iconColor, this.onTap})
+      {Key? key,
+      this.icon,
+      this.color,
+      this.child,
+      this.width,
+      this.iconColor,
+      this.onTap})
       : super(key: key);
 
   @override
@@ -18,14 +26,15 @@ class HexagonButton extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: HexagonWidget.pointy(
-          width: 50,
+          width: width ?? 50,
           color: color ?? Theme.of(context).primaryColor,
           elevation: 8,
-          child: Icon(
-            icon,
-            color: iconColor ?? Colors.white,
-            size: 26,
-          ),
+          child: child ??
+              Icon(
+                icon,
+                color: iconColor ?? Colors.white,
+                size: 26,
+              ),
         ),
       ),
     );
