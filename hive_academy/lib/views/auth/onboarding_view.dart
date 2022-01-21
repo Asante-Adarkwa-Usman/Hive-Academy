@@ -173,7 +173,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 const SizedBox(height: 10),
                 PrimaryButton(
                     buttonColor: Colors.white,
-                    textColor: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).primaryColorDark,
                     text: 'Join Us',
                     onPressed: () {
                       Navigator.push(
