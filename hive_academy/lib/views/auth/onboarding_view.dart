@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_academy/custom_widgets/primary_button.dart';
-import 'package:hive_academy/custom_widgets/video_player_view.dart';
 import 'package:hive_academy/views/auth/login_view.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
 

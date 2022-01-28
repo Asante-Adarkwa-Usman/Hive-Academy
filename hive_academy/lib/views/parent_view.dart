@@ -19,7 +19,6 @@ class _ParentViewState extends State<ParentView> {
   final List<Widget> _views = [
     const HomeView(),
     const CourseView(),
-    const SearchCourseView(),
     const PaymentView(),
     const ProfileView()
   ];
@@ -31,14 +30,14 @@ class _ParentViewState extends State<ParentView> {
         index: _currentIndex,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: Theme.of(context).primaryColor,
         unselectedItemColor: Theme.of(context).primaryColor,
         showSelectedLabels: false,
@@ -62,17 +61,17 @@ class _ParentViewState extends State<ParentView> {
               ),
               label: 'Courses',
               tooltip: 'Courses'),
+          // BottomNavigationBarItem(
+          //     icon: const Icon(Icons.search_outlined, size: 30),
+          //     activeIcon: HexagonButton(
+          //       icon: Icons.search,
+          //       iconColor: Theme.of(context).primaryColorDark,
+          //       color: Colors.white,
+          //     ),
+          //     label: 'Search',
+          //     tooltip: 'Set Appointments'),
           BottomNavigationBarItem(
-              icon: const Icon(Icons.search_outlined, size: 30),
-              activeIcon: HexagonButton(
-                icon: Icons.search,
-                iconColor: Theme.of(context).primaryColorDark,
-                color: Colors.white,
-              ),
-              label: 'Search',
-              tooltip: 'Set Appointments'),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.payments_outlined, size: 30),
+              icon: const Icon(Icons.payments_outlined, size: 35),
               activeIcon: HexagonButton(
                 icon: Icons.payments,
                 iconColor: Theme.of(context).primaryColorDark,
@@ -81,7 +80,7 @@ class _ParentViewState extends State<ParentView> {
               label: 'Payment',
               tooltip: 'Payments'),
           BottomNavigationBarItem(
-              icon: const Icon(Icons.person, size: 30),
+              icon: const Icon(Icons.person, size: 35),
               activeIcon: HexagonButton(
                 icon: Icons.person,
                 iconColor: Theme.of(context).primaryColorDark,
@@ -90,6 +89,17 @@ class _ParentViewState extends State<ParentView> {
               label: 'Profile',
               tooltip: 'Profile Settings'),
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+        child: FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SearchCourseView()));
+            },
+            tooltip: 'Search Course',
+            child: const Icon(Icons.search, size: 30, color: Colors.white)),
       ),
     );
   }

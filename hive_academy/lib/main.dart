@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_academy/views/parent_view.dart';
+//import 'package:hive_academy/views/parent_view.dart';
 import 'package:hive_academy/views/auth/onboarding_view.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         duration: 4000,
         imageSize: 400,
         navigateRoute: const OnboardingView(),
+        pageRouteTransition: PageRouteTransition.CupertinoPageRoute,
         imageSrc: "assets/images/hiveLogo.png",
         text: 'powered by KUMASI HIVE',
         textType: TextType.NormalText,

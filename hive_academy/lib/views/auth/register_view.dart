@@ -26,9 +26,6 @@ class _RegisterViewState extends State<RegisterView> {
         clipBehavior: Clip.none,
         fit: StackFit.expand,
         children: <Widget>[
-          // Container(
-          //   color: const Color.fromRGBO(254, 136, 4, .25),
-          // ),
           Positioned(
             child: HexagonButton(
               width: MediaQuery.of(context).size.width * 0.07,
@@ -230,7 +227,12 @@ class _RegisterViewState extends State<RegisterView> {
                                   margin: const EdgeInsets.only(left: 30),
                                   child: PrimaryButton(
                                     text: 'Complete',
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginView()));
+                                    },
                                     width:
                                         MediaQuery.of(context).size.width * 0.4,
                                   ),
