@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_academy/custom_widgets/primary_button.dart';
 import 'package:hive_academy/views/auth/login_view.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
+import 'package:hive_academy/route/route.dart' as router;
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({Key? key}) : super(key: key);
@@ -131,11 +132,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     text: 'Login',
                     textColor: Colors.white,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginView()),
-                      );
+                      Navigator.pushNamed(context, router.loginPage);
                     }),
                 const SizedBox(height: 10),
                 Container(
@@ -175,11 +172,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     textColor: Theme.of(context).primaryColorDark,
                     text: 'Join Us',
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterView()),
-                      );
+                      Navigator.pushNamed(context, router.registerPage);
                     }),
               ],
             ),

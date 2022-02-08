@@ -3,9 +3,9 @@ import 'package:hive_academy/custom_widgets/hexagon_button.dart';
 import 'package:hive_academy/views/main/course/course_view.dart';
 import 'package:hive_academy/views/main/payment/payment_view.dart';
 import 'package:hive_academy/views/main/profile/profile_view.dart';
-import 'package:hive_academy/views/main/search/search_course_view.dart';
-
 import 'main/home/home_view.dart';
+import 'package:hive_academy/route/route.dart' as router;
+
 
 class ParentView extends StatefulWidget {
   const ParentView({Key? key}) : super(key: key);
@@ -95,8 +95,7 @@ class _ParentViewState extends State<ParentView> {
         margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         child: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const SearchCourseView()));
+              Navigator.pushNamed(context, router.searchCoursePage);
             },
             tooltip: 'Search Course',
             child: const Icon(Icons.search, size: 30, color: Colors.white)),

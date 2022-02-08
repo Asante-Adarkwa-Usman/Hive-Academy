@@ -75,9 +75,10 @@ class HomeView extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
                   height: MediaQuery.of(context).size.height * 0.18,
-                  width: MediaQuery.of(context).size.width * 0.85,
+                  width: MediaQuery.of(context).size.width * 0.84,
                   child: Card(
                     color: Colors.white,
                     elevation: 10,
