@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_academy/custom_widgets/hexagon_button.dart';
 import 'package:hive_academy/custom_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
-
-import 'login_view.dart';
+import 'package:hive_academy/route/route.dart' as router;
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -228,10 +227,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   child: PrimaryButton(
                                     text: 'Complete',
                                     onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const LoginView()));
+                                      Navigator.pushNamed(context, router.loginPage);
                                     },
                                     width:
                                         MediaQuery.of(context).size.width * 0.4,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:hive_academy/views/parent_view.dart';
 import 'package:hive_academy/views/auth/onboarding_view.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
-
+import 'package:hive_academy/route/route.dart' as router;
 void main() {
   runApp(const MyApp());
 }
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
+      onGenerateRoute: router.generateRoute,
     );
   }
 }
