@@ -1,5 +1,6 @@
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_academy/custom_widgets/course_card_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -77,7 +78,7 @@ class HomeView extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 20),
-                  height: MediaQuery.of(context).size.height * 0.18,
+                  height: MediaQuery.of(context).size.height * 0.20,
                   width: MediaQuery.of(context).size.width * 0.84,
                   child: Card(
                     color: Colors.white,
@@ -165,6 +166,8 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 10),
+                const CourseCardView(),
               ],
             ),
           ),

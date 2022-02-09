@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_academy/custom_widgets/primary_button.dart';
-import 'package:hive_academy/views/auth/login_view.dart';
-import 'package:hive_academy/views/auth/register_view.dart';
+import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/route/route.dart' as router;
 
 class OnboardingView extends StatefulWidget {
@@ -59,8 +57,8 @@ class _OnboardingViewState extends State<OnboardingView> {
       child: ListView(
         children: [
           SizedBox(
-              height: 250,
-              width: 200,
+              height: MediaQuery.of(context).size.height * 0.32,
+              width: MediaQuery.of(context).size.width * 0.20,
               child: Image.asset('assets/images/controller.png')),
           const SizedBox(height: 20),
           const InkWell(

@@ -7,6 +7,7 @@ class HexagonButton extends StatelessWidget {
   final Color? iconColor;
   final double? width;
   final Widget? child;
+  final EdgeInsetsGeometry? margin;
   final void Function()? onTap;
 
   const HexagonButton(
@@ -16,13 +17,14 @@ class HexagonButton extends StatelessWidget {
       this.child,
       this.width,
       this.iconColor,
+      this.margin,
       this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8),
+      margin: margin ?? const EdgeInsets.all(8),
       child: InkWell(
         onTap: onTap,
         child: HexagonWidget.pointy(
