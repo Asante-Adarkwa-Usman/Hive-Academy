@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_academy/custom_widgets/primary_button.dart';
+import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
 

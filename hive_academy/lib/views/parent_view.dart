@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_academy/custom_widgets/hexagon_button.dart';
+import 'package:hive_academy/shared_widgets/hexagon_button.dart';
 import 'package:hive_academy/views/main/course/course_view.dart';
 import 'package:hive_academy/views/main/payment/payment_view.dart';
 import 'package:hive_academy/views/main/profile/profile_view.dart';
@@ -61,15 +61,6 @@ class _ParentViewState extends State<ParentView> {
               ),
               label: 'Courses',
               tooltip: 'Courses'),
-          // BottomNavigationBarItem(
-          //     icon: const Icon(Icons.search_outlined, size: 30),
-          //     activeIcon: HexagonButton(
-          //       icon: Icons.search,
-          //       iconColor: Theme.of(context).primaryColorDark,
-          //       color: Colors.white,
-          //     ),
-          //     label: 'Search',
-          //     tooltip: 'Set Appointments'),
           BottomNavigationBarItem(
               icon: const Icon(Icons.payments_outlined, size: 35),
               activeIcon: HexagonButton(
