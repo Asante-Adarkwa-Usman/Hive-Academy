@@ -22,8 +22,6 @@ class CourseCardView extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
-       
-        height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width * 0.54, 
         child: Card(
           elevation: 2,
@@ -85,7 +83,7 @@ class CourseCardView extends StatelessWidget {
                 fit: FlexFit.loose,
                 child:  Text(
                   courseDescription ?? 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo',
-                   maxLines: 4,
+                   maxLines: 3,
                    softWrap: true,
                    overflow: TextOverflow.ellipsis,
                    textAlign: TextAlign.center,

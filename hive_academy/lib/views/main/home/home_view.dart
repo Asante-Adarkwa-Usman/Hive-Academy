@@ -1,5 +1,6 @@
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
 
 
@@ -57,11 +58,24 @@ class HomeView extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          IconButton(
-                              onPressed: null,
-                              icon: Icon(Icons.notifications_outlined,
-                                  color: Theme.of(context).primaryColorDark),
-                              focusColor: Theme.of(context).primaryColorDark),
+                          Badge(
+                            badgeColor: Colors.white,
+                            animationType: BadgeAnimationType.slide,
+                            position: BadgePosition.topEnd(top: 2, end: 4),
+                            badgeContent: Text(
+                              '2',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                            ),
+                            child: IconButton(
+                                onPressed: null,
+                                icon: Icon(Icons.notifications_outlined,
+                                    color: Theme.of(context).primaryColorDark),
+                                focusColor: Theme.of(context).primaryColorDark),
+                          ),
                           Container(
                             margin: const EdgeInsets.fromLTRB(0, 15, 10, 0),
                             child: DashedCircle(
@@ -83,7 +97,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Center(
                     child: Container(
-                      margin: const EdgeInsets.only(top: 20),
+                      margin: const EdgeInsets.only(top: 10),
                       height: MediaQuery.of(context).size.height * 0.20,
                       width: MediaQuery.of(context).size.width * 0.84,
                       child: Card(
@@ -178,12 +192,11 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(12, 8, 8, 0),
+                        padding: EdgeInsets.only(left: 12),
                         child: Text('Featured',
                             style: TextStyle(
                               fontSize: 16,
@@ -192,7 +205,7 @@ class HomeView extends StatelessWidget {
                             )),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                        padding: EdgeInsets.only(right: 8),
                         child: TextButton(
                           onPressed: null,
                           child: Text('See All',
@@ -207,7 +220,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 10),
-                    height: MediaQuery.of(context).size.height * 0.33,
+                    height: MediaQuery.of(context).size.height * 0.30,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -222,7 +235,7 @@ class HomeView extends StatelessWidget {
                           courseTitle: 'Back End with Node.js',
                           courseDescription:
                               'Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js',
-                          completionStatus: '0',
+                          completionStatus: '2',
                         );
                       },
                       separatorBuilder: (context, index) {
@@ -232,7 +245,7 @@ class HomeView extends StatelessWidget {
                   ),
 
                   const Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: EdgeInsets.fromLTRB(12, 8, 0,2),
                     child: Text('Catalog',
                         style: TextStyle(
                           fontSize: 16,
@@ -242,20 +255,20 @@ class HomeView extends StatelessWidget {
                   ),
                   //  const SizedBox(height: 10),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.35,
+                    height: MediaQuery.of(context).size.height * 0.30,
                     child: CustomScrollView(
                       primary: false,
                       slivers: <Widget>[
                         SliverPadding(
-                          padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(12),
                           sliver: SliverGrid.count(
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 12,
                             crossAxisCount: 2,
                             children: <Widget>[
                               Container(
-                                width: 100,
-                                height: 60,
+                                // width: MediaQuery.of(context).size.width * 0.25,
+                                // height: MediaQuery.of(context).size.height * 0.05,
                                 padding: const EdgeInsets.all(8),
                                 child: const Text(
                                     "He'd have you all unravel at the"),
@@ -266,26 +279,45 @@ class HomeView extends StatelessWidget {
                                 child: const Text('Heed not the rabble'),
                                 color: Colors.green[200],
                               ),
-                              Container(
+                               Container(
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                height: MediaQuery.of(context).size.height * 0.20,
                                 padding: const EdgeInsets.all(8),
-                                child: const Text('Sound of screams but the'),
-                                color: Colors.green[300],
+                                child: const Text(
+                                    "He'd have you all unravel at the"),
+                                color: Colors.green[100],
                               ),
                               Container(
                                 padding: const EdgeInsets.all(8),
-                                child: const Text('Who scream'),
-                                color: Colors.green[400],
+                                child: const Text('Heed not the rabble'),
+                                color: Colors.green[200],
+                              ),
+                               Container(
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                height: MediaQuery.of(context).size.height * 0.20,
+                                padding: const EdgeInsets.all(8),
+                                child: const Text(
+                                    "He'd have you all unravel at the"),
+                                color: Colors.green[100],
                               ),
                               Container(
                                 padding: const EdgeInsets.all(8),
-                                child: const Text('Revolution is coming...'),
-                                color: Colors.green[500],
+                                child: const Text('Heed not the rabble'),
+                                color: Colors.green[200],
+                              ),
+                                Container(
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                height: MediaQuery.of(context).size.height * 0.20,
+                                padding: const EdgeInsets.all(8),
+                                child: const Text(
+                                    "He'd have you all unravel at the"),
+                                color: Colors.green[100],
                               ),
                               Container(
                                 padding: const EdgeInsets.all(8),
-                                child: const Text('Revolution, they...'),
-                                color: Colors.green[600],
-                              ),
+                                child: const Text('Heed not the rabble'),
+                                color: Colors.green[200],
+                              ), 
                             ],
                           ),
                         ),
