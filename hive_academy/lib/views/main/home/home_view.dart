@@ -1,8 +1,9 @@
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
+import 'package:hive_academy/custom_widgets/catalog_card_view.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
-
+import 'package:hive_academy/custom_widgets/discount_card_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -95,102 +96,11 @@ class HomeView extends StatelessWidget {
                       )
                     ],
                   ),
-                  Center(
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: MediaQuery.of(context).size.height * 0.20,
-                      width: MediaQuery.of(context).size.width * 0.84,
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Row(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(24),
-                                  child: Text(
-                                    '5%',
-                                    style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w400,
-                                      color: Theme.of(context).primaryColorDark,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.56,
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          alignment: Alignment.centerRight,
-                                          child: IconButton(
-                                              onPressed: null,
-                                              icon: Icon(
-                                                Icons.close,
-                                                size: 24,
-                                                color: Theme.of(context)
-                                                    .primaryColorDark,
-                                              ))),
-                                      Text(
-                                        'Back End with Node.js',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w700,
-                                          color: Theme.of(context)
-                                              .primaryColorDark,
-                                        ),
-                                      ),
-                                    ]),
-                                const SizedBox(height: 4),
-                                const Text(
-                                  'Discount ends',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(183, 183, 183, 1),
-                                  ),
-                                ),
-                                Row(
-                                  children: const <Widget>[
-                                    DiscountWidget(
-                                      discountQuantity: '10',
-                                      remainingType: 'Days',
-                                    ),
-                                    DiscountWidget(
-                                      discountQuantity: '300',
-                                      remainingType: 'Hours',
-                                    ),
-                                    DiscountWidget(
-                                      discountQuantity: '3600',
-                                      remainingType: 'Minutes',
-                                    ),
-                                    DiscountWidget(
-                                      discountQuantity: '12300',
-                                      remainingType: 'Seconds',
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                  const SizedBox(height: 5),
+                  const DiscountCard(
+                    discountPercent: '10%',
+                    title:
+                        'Back End with Node.js End with Node.js End with Node.js ',
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -220,7 +130,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 10),
-                    height: MediaQuery.of(context).size.height * 0.30,
+                    height: MediaQuery.of(context).size.height * 0.28,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -235,7 +145,7 @@ class HomeView extends StatelessWidget {
                           courseTitle: 'Back End with Node.js',
                           courseDescription:
                               'Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js',
-                          completionStatus: '2',
+                          completionStatus: '0',
                         );
                       },
                       separatorBuilder: (context, index) {
@@ -243,9 +153,8 @@ class HomeView extends StatelessWidget {
                       },
                     ),
                   ),
-
                   const Padding(
-                    padding: EdgeInsets.fromLTRB(12, 8, 0,2),
+                    padding: EdgeInsets.fromLTRB(12, 8, 0, 8),
                     child: Text('Catalog',
                         style: TextStyle(
                           fontSize: 16,
@@ -253,75 +162,18 @@ class HomeView extends StatelessWidget {
                           color: Color.fromRGBO(183, 183, 183, 1),
                         )),
                   ),
-                  //  const SizedBox(height: 10),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.30,
-                    child: CustomScrollView(
-                      primary: false,
-                      slivers: <Widget>[
-                        SliverPadding(
-                          padding: const EdgeInsets.all(12),
-                          sliver: SliverGrid.count(
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 12,
-                            crossAxisCount: 2,
-                            children: <Widget>[
-                              Container(
-                                // width: MediaQuery.of(context).size.width * 0.25,
-                                // height: MediaQuery.of(context).size.height * 0.05,
-                                padding: const EdgeInsets.all(8),
-                                child: const Text(
-                                    "He'd have you all unravel at the"),
-                                color: Colors.green[100],
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                child: const Text('Heed not the rabble'),
-                                color: Colors.green[200],
-                              ),
-                               Container(
-                                width: MediaQuery.of(context).size.width * 0.25,
-                                height: MediaQuery.of(context).size.height * 0.20,
-                                padding: const EdgeInsets.all(8),
-                                child: const Text(
-                                    "He'd have you all unravel at the"),
-                                color: Colors.green[100],
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                child: const Text('Heed not the rabble'),
-                                color: Colors.green[200],
-                              ),
-                               Container(
-                                width: MediaQuery.of(context).size.width * 0.25,
-                                height: MediaQuery.of(context).size.height * 0.20,
-                                padding: const EdgeInsets.all(8),
-                                child: const Text(
-                                    "He'd have you all unravel at the"),
-                                color: Colors.green[100],
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                child: const Text('Heed not the rabble'),
-                                color: Colors.green[200],
-                              ),
-                                Container(
-                                width: MediaQuery.of(context).size.width * 0.25,
-                                height: MediaQuery.of(context).size.height * 0.20,
-                                padding: const EdgeInsets.all(8),
-                                child: const Text(
-                                    "He'd have you all unravel at the"),
-                                color: Colors.green[100],
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                child: const Text('Heed not the rabble'),
-                                color: Colors.green[200],
-                              ), 
-                            ],
-                          ),
-                        ),
-                      ],
+                    height: MediaQuery.of(context).size.height * 0.60,
+                    child: GridView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) => const CatalogCard(
+                          onTap: null, subject: 'Artificial Intelligence(AI)'),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 14,
+                        mainAxisSpacing: 10,
+                        crossAxisCount: 2,
+                      ),
                     ),
                   )
                 ],
@@ -330,61 +182,6 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class DiscountWidget extends StatelessWidget {
-  final String? discountQuantity;
-  final String? remainingType;
-  const DiscountWidget(
-      {Key? key, required this.discountQuantity, required this.remainingType})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.05,
-              width: MediaQuery.of(context).size.width * 0.12,
-              margin: const EdgeInsets.only(right: 5),
-              child: Card(
-                  color: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    side: BorderSide(
-                      color: Theme.of(context).primaryColorDark,
-                      width: 1,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      discountQuantity.toString(),
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color.fromRGBO(183, 183, 183, 1),
-                      ),
-                    ),
-                  )),
-            ),
-          ],
-        ),
-        //const SizedBox(height: 4),
-        Text(
-          remainingType.toString(),
-          style: TextStyle(
-            fontSize: 9,
-            fontWeight: FontWeight.w400,
-            color: Theme.of(context).primaryColorDark,
-          ),
-        ),
-      ],
-      //  ],
     );
   }
 }
