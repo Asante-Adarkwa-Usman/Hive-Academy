@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/route/route.dart' as router;
 
@@ -130,7 +131,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     text: 'Login',
                     textColor: Colors.white,
                     onPressed: () {
-                      Navigator.pushNamed(context, router.loginPage);
+                      Get.toNamed(router.loginPage);
                     }),
                 const SizedBox(height: 10),
                 Container(
@@ -170,7 +171,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     textColor: Theme.of(context).primaryColorDark,
                     text: 'Join Us',
                     onPressed: () {
-                      Navigator.pushNamed(context, router.registerPage);
+                      Get.toNamed(router.registerPage);
                     }),
               ],
             ),

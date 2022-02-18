@@ -73,18 +73,16 @@ class _DiscountCardState extends State<DiscountCard> {
                                   ))),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.56,
-                            child: Flexible(
-                              child: Text(
-                                widget.title.toString(),
-                                maxLines: 1,
-                                softWrap: false,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme.of(context).primaryColorDark,
-                                ),
+                            child: Text(
+                              widget.title.toString(),
+                              maxLines: 1,
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).primaryColorDark,
                               ),
                             ),
                           ),

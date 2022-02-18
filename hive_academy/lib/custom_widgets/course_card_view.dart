@@ -24,10 +24,12 @@ class CourseCardView extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.40,
         child: Card(
           elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Column(
             children: <Widget>[
               Stack(
-                fit: StackFit.loose,
                 clipBehavior: Clip.none,
                 children: [
                   Image.network(
@@ -60,32 +62,26 @@ class CourseCardView extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 18),
-              Flexible(
-                fit: FlexFit.loose,
-                child: Text(
-                  courseTitle ?? 'Game Development With Unity 3D',
-                  maxLines: 2,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      overflow: TextOverflow.visible),
-                ),
+              Text(
+                courseTitle ?? 'Game Development With Unity 3D',
+                maxLines: 2,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.visible),
               ),
               const SizedBox(height: 8),
-              Flexible(
-                fit: FlexFit.loose,
-                child: Text(
-                  courseDescription ??
-                      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo',
-                  maxLines: 3,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 10, color: Colors.grey[800]),
-                ),
+              Text(
+                courseDescription ??
+                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo',
+                maxLines: 3,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 10, color: Colors.grey[800]),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 12, 0, 2),
