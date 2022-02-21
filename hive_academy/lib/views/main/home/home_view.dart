@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
@@ -81,13 +82,21 @@ class HomeView extends StatelessWidget {
                             margin: const EdgeInsets.fromLTRB(0, 15, 10, 0),
                             child: DashedCircle(
                               color: Theme.of(context).primaryColorDark,
-                              child: const Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: CircleAvatar(
-                                  radius: 18,
-                                  backgroundColor: Colors.white54,
-                                  backgroundImage: NetworkImage(
-                                      'https://ichef.bbci.co.uk/news/490/cpsprodpb/C870/production/_112921315_gettyimages-876284806.jpg'),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      'https://ichef.bbci.co.uk/news/490/cpsprodpb/C870/production/_112921315_gettyimages-876284806.jpg',
+                                  placeholder: (context, url) =>
+                                      const CircleAvatar(
+                                    backgroundColor: Colors.amber,
+                                    radius: 18,
+                                  ),
+                                  imageBuilder: (context, image) =>
+                                      CircleAvatar(
+                                    backgroundImage: image,
+                                    radius: 18,
+                                  ),
                                 ),
                               ),
                             ),

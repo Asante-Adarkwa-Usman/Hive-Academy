@@ -41,6 +41,7 @@ dependencies:
   dashed_circle: ^0.0.2
   badges: ^2.0.2
   get: ^4.6.1
+  cached_network_image: ^3.2.0
   
 
 dev_dependencies:

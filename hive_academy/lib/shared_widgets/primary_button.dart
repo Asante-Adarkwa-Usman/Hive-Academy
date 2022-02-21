@@ -6,7 +6,7 @@ class PrimaryButton extends StatelessWidget {
   final String text;
   final double? height;
   final double? width;
-  final GestureTapCallback onPressed;
+  final GestureTapCallback? onPressed;
   const PrimaryButton(
       {Key? key,
       this.buttonColor,
