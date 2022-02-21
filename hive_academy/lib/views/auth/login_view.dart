@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
@@ -91,10 +92,7 @@ class _LoginViewState extends State<LoginView> {
                   // const SizedBox(height: 20),
                   PrimaryButton(
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => const ParentView()),
-                          (route) => false);
+                      Get.offAll(() => const ParentView());
                     },
                     text: 'Login',
                   ),
@@ -110,8 +108,7 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         InkWell(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const RegisterView()));
+                              Get.to(() => const RegisterView());
                             },
                             child: Container(
                               padding: const EdgeInsets.only(left: 4),
