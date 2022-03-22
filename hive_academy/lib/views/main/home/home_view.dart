@@ -5,6 +5,7 @@ import 'package:badges/badges.dart';
 import 'package:hive_academy/custom_widgets/catalog_card_view.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
 import 'package:hive_academy/custom_widgets/discount_card_view.dart';
+import 'package:hive_academy/route/route.dart' as router;
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -80,22 +81,28 @@ class HomeView extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.fromLTRB(0, 15, 10, 0),
-                            child: DashedCircle(
-                              color: Theme.of(context).primaryColorDark,
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      'https://ichef.bbci.co.uk/news/490/cpsprodpb/C870/production/_112921315_gettyimages-876284806.jpg',
-                                  placeholder: (context, url) =>
-                                      const CircleAvatar(
-                                    backgroundColor: Colors.amber,
-                                    radius: 18,
-                                  ),
-                                  imageBuilder: (context, image) =>
-                                      CircleAvatar(
-                                    backgroundImage: image,
-                                    radius: 18,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, router.profileFromHomePage);
+                              },
+                              child: DashedCircle(
+                                color: Theme.of(context).primaryColorDark,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        'https://ichef.bbci.co.uk/news/490/cpsprodpb/C870/production/_112921315_gettyimages-876284806.jpg',
+                                    placeholder: (context, url) =>
+                                        const CircleAvatar(
+                                      backgroundColor: Colors.amber,
+                                      radius: 18,
+                                    ),
+                                    imageBuilder: (context, image) =>
+                                        CircleAvatar(
+                                      backgroundImage: image,
+                                      radius: 18,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -139,7 +146,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 10),
-                    height: MediaQuery.of(context).size.height * 0.28,
+                    height: MediaQuery.of(context).size.height * 0.26,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,

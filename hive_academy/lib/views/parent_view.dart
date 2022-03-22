@@ -6,7 +6,6 @@ import 'package:hive_academy/views/main/profile/profile_view.dart';
 import 'main/home/home_view.dart';
 import 'package:hive_academy/route/route.dart' as router;
 
-
 class ParentView extends StatefulWidget {
   const ParentView({Key? key}) : super(key: key);
 
