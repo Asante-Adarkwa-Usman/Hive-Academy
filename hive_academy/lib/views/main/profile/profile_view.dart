@@ -1,12 +1,28 @@
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
+import 'package:hive_academy/custom_widgets/change_password_view.dart';
 import '../../../shared_widgets/custom_text_form_field.dart';
 import '../../../shared_widgets/primary_button.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
+
+  //Edit Profile
+  void _showBottomSheet(context) {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(30),
+          ),
+        ),
+        elevation: 2,
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return const ChangePasswordView();
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +63,11 @@ class ProfileView extends StatelessWidget {
                     ),
                     Container(
                       margin: const EdgeInsets.only(right: 10),
-                      child: const IconButton(
-                        onPressed: null,
-                        icon: Icon(Icons.edit_outlined,
+                      child: IconButton(
+                        onPressed: () {
+                          _showBottomSheet(context);
+                        },
+                        icon: const Icon(Icons.edit_outlined,
                             size: 30, color: Colors.white),
                       ),
                     ),

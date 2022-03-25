@@ -6,6 +6,7 @@ class PrimaryButton extends StatelessWidget {
   final String text;
   final double? height;
   final double? width;
+  final double? fontSize;
   final GestureTapCallback? onPressed;
   const PrimaryButton(
       {Key? key,
@@ -14,6 +15,7 @@ class PrimaryButton extends StatelessWidget {
       required this.text,
       this.height,
       this.width,
+      this.fontSize,
       required this.onPressed})
       : super(key: key);
 
@@ -31,7 +33,7 @@ class PrimaryButton extends StatelessWidget {
             onPressed: onPressed,
             child: Text(text,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: fontSize ?? 20,
                     fontWeight: FontWeight.bold,
                     color: textColor ?? Colors.white))),
       ),
