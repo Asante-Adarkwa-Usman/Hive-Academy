@@ -100,7 +100,7 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 80),
+            const SizedBox(height: 60),
             Column(
               children: [
                 CustomTextFormField(
