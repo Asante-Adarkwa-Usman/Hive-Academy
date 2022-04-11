@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:hive_academy/custom_widgets/community_card.dart';
+import 'package:hive_academy/route/route.dart' as router;
 
-class PaymentView extends StatefulWidget {
-  const PaymentView({Key? key}) : super(key: key);
+class CommunityView extends StatefulWidget {
+  const CommunityView({Key? key}) : super(key: key);
 
   @override
-  State<PaymentView> createState() => _PaymentViewState();
+  State<CommunityView> createState() => _CommunityViewState();
 }
 
-class _PaymentViewState extends State<PaymentView> {
+class _CommunityViewState extends State<CommunityView> {
   int _current = 0;
   final List<Widget> _carouselTextList = const [
     Text(
@@ -113,14 +114,18 @@ class _PaymentViewState extends State<PaymentView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const CommunityCard(
-                      onTap: null,
+                    CommunityCard(
+                      onTap: () {
+                        Navigator.pushNamed(context, router.chatPage);
+                      },
                       title: 'Chat',
                       cardColor: Colors.black,
                       imageSrc: 'assets/images/chat.png',
                     ),
                     CommunityCard(
-                      onTap: null,
+                      onTap: () {
+                        Navigator.pushNamed(context, router.forumPage);
+                      },
                       title: 'Forum',
                       cardColor: Theme.of(context).primaryColorDark,
                       imageSrc: 'assets/images/forum.png',
@@ -130,10 +135,12 @@ class _PaymentViewState extends State<PaymentView> {
                 const SizedBox(
                   height: 20,
                 ),
-                const CommunityCard(
-                  onTap: null,
+                CommunityCard(
+                  onTap: () {
+                    Navigator.pushNamed(context, router.marketPage);
+                  },
                   title: 'Market Place',
-                  cardColor: Color.fromRGBO(167, 167, 167, 1),
+                  cardColor: const Color.fromRGBO(167, 167, 167, 1),
                   imageSrc: 'assets/images/market.png',
                 ),
               ],

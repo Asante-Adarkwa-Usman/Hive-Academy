@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_academy/shared_widgets/hexagon_button.dart';
 import 'package:hive_academy/views/main/course/course_view.dart';
-import 'package:hive_academy/views/main/payment/payment_view.dart';
+import 'package:hive_academy/views/main/community/community_view.dart';
 import 'package:hive_academy/views/main/profile/profile_view.dart';
 import 'main/home/home_view.dart';
 import 'package:hive_academy/route/route.dart' as router;
@@ -18,7 +18,7 @@ class _ParentViewState extends State<ParentView> {
   final List<Widget> _views = [
     const HomeView(),
     const CourseView(),
-    const PaymentView(),
+    const CommunityView(),
     const ProfileView()
   ];
   @override
@@ -61,14 +61,14 @@ class _ParentViewState extends State<ParentView> {
               label: 'Courses',
               tooltip: 'Courses'),
           BottomNavigationBarItem(
-              icon: const Icon(Icons.payments_outlined, size: 35),
+              icon: const Icon(Icons.public_outlined, size: 35),
               activeIcon: HexagonButton(
-                icon: Icons.payments,
+                icon: Icons.public,
                 iconColor: Theme.of(context).primaryColorDark,
                 color: Colors.white,
               ),
-              label: 'Payment',
-              tooltip: 'Payments'),
+              label: 'Community',
+              tooltip: 'Chat with the Hive community'),
           BottomNavigationBarItem(
               icon: const Icon(Icons.person, size: 35),
               activeIcon: HexagonButton(
