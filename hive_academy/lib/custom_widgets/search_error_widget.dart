@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 
 class SearchErrorWidget extends StatelessWidget {
+  final String name;
   const SearchErrorWidget({
     Key? key,
+    required this.name,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,14 +42,17 @@ class SearchErrorWidget extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          PrimaryButton(
-              text: 'Go to courses',
-              fontSize: 15,
-              textColor: Theme.of(context).primaryColorDark,
-              onPressed: () {},
-              width: MediaQuery.of(context).size.width * 0.48,
-              height: MediaQuery.of(context).size.height * 0.05,
-              buttonColor: const Color.fromARGB(255, 241, 205, 164))
+          Visibility(
+            visible: name == 'search' ? false : true,
+            child: PrimaryButton(
+                text: 'Go to courses',
+                fontSize: 15,
+                textColor: Theme.of(context).primaryColorDark,
+                onPressed: () {},
+                width: MediaQuery.of(context).size.width * 0.48,
+                height: MediaQuery.of(context).size.height * 0.05,
+                buttonColor: const Color.fromARGB(255, 241, 205, 164)),
+          )
         ],
       ),
     );

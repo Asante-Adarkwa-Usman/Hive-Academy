@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_academy/custom_widgets/my_course_card_view.dart';
+//import 'package:hive_academy/custom_widgets/search_error_widget.dart';
+import 'package:hive_academy/route/route.dart' as router;
 
 class CourseView extends StatelessWidget {
   const CourseView({Key? key}) : super(key: key);
@@ -74,8 +76,10 @@ class CourseView extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: GridView.builder(
                     itemCount: 8,
-                    itemBuilder: (context, index) => const MyCourseCardView(
-                        onTap: null,
+                    itemBuilder: (context, index) => MyCourseCardView(
+                        onTap: () {
+                          Navigator.pushNamed(context, router.mainCoursePage);
+                        },
                         completionPercentage: '25',
                         courseTitle: 'Game Development With Unity'),
                     gridDelegate:
@@ -90,7 +94,8 @@ class CourseView extends StatelessWidget {
                 //  SizedBox(
                 //     height: 20,
                 //   ),
-                // const SearchErrorWidget(),
+                //Or Show the Search Error Widget
+                //const SearchErrorWidget(name: 'course'),
               ]),
         ),
       )),
