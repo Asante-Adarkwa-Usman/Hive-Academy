@@ -16,8 +16,8 @@ class ParentView extends StatefulWidget {
 class _ParentViewState extends State<ParentView> {
   int _currentIndex = 0;
   final List<Widget> _views = [
-    const HomeView(),
-    const CourseView(),
+    HomeView(),
+    CourseView(),
     const CommunityView(),
     const ProfileView()
   ];

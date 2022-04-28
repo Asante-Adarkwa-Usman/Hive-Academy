@@ -6,11 +6,13 @@ class MyCourseCardView extends StatelessWidget {
   final String? lessonCount;
   final String? courseImage;
   final String? completionPercentage;
+  final String? courseBanner;
 
   final void Function()? onTap;
   const MyCourseCardView(
       {Key? key,
       required this.courseTitle,
+      required this.courseBanner,
       this.courseImage,
       this.completionPercentage,
       this.lessonCount,
@@ -31,10 +33,10 @@ class MyCourseCardView extends StatelessWidget {
           child: Column(
             children: <Widget>[
               CachedNetworkImage(
-                imageUrl:
-                    'http://www.5ants.com/wp-content/uploads/2016/11/pcgame2-1-830x420.jpg',
-                fit: BoxFit.cover,
+                imageUrl: courseBanner.toString(),
+                fit: BoxFit.fitWidth,
                 width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.08,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(

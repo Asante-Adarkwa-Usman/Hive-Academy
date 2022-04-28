@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hive_academy/controllers/courses/courses_controller.dart';
 import 'package:hive_academy/custom_widgets/my_course_card_view.dart';
 //import 'package:hive_academy/custom_widgets/search_error_widget.dart';
 import 'package:hive_academy/route/route.dart' as router;
 
 class CourseView extends StatelessWidget {
-  const CourseView({Key? key}) : super(key: key);
+  final CoursesController coursesController = Get.put(CoursesController());
+
+  CourseView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,22 +78,37 @@ class CourseView extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(15, 25, 15, 0),
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
-                  child: GridView.builder(
-                    itemCount: 8,
-                    itemBuilder: (context, index) => MyCourseCardView(
+                  child: Obx(() {
+                    if (coursesController.isLoading.value == true) {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    }
+                    if (coursesController.courses.isEmpty) {
+                      return const Center(
+                        child: Text('No courses found'),
+                      );
+                    }
+                    return GridView.builder(
+                      itemCount: coursesController.courses.length,
+                      itemBuilder: (context, index) => MyCourseCardView(
                         onTap: () {
                           Navigator.pushNamed(context, router.mainCoursePage);
                         },
+                        courseBanner: coursesController.courses[index]
+                            ['banner'],
                         completionPercentage: '25',
-                        courseTitle: 'Game Development With Unity'),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.92,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                    ),
-                  ),
+                        courseTitle: coursesController.courses[index]['name'],
+                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.92,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                      ),
+                    );
+                  }),
                 )
                 //  SizedBox(
                 //     height: 20,
