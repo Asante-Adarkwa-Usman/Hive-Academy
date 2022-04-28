@@ -39,9 +39,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case loginPage:
       return MaterialPageRoute(builder: (context) => const LoginView());
     case homePage:
-      return MaterialPageRoute(builder: (context) => const HomeView());
+      return MaterialPageRoute(builder: (context) => HomeView());
     case coursePage:
-      return MaterialPageRoute(builder: (context) => const CourseView());
+      return MaterialPageRoute(builder: (context) => CourseView());
     case mainCoursePage:
       return MaterialPageRoute(builder: (context) => const MainCourseView());
     case communityPage:

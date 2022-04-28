@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color.fromRGBO(254, 136, 4, 1),
         primarySwatch: Colors.orange,
       ),
-      darkTheme: ThemeData.dark(),
       home: SplashScreenView(
         duration: 4000,
         imageSize: 400,
@@ -37,7 +36,6 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       onGenerateRoute: router.generateRoute,
-      // initialRoute: router.homePage,
     );
   }
 }

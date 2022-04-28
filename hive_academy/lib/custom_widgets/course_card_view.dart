@@ -6,14 +6,18 @@ class CourseCardView extends StatelessWidget {
   final String? courseTitle;
   final String? courseDescription;
   final String? courseImage;
-  final String? completionStatus;
+  final String? lessons;
+  final String? priceTag;
   final void Function()? onTap;
+  final String? courseBanner;
   const CourseCardView(
       {Key? key,
       required this.courseTitle,
       required this.courseDescription,
+      required this.courseBanner,
+      required this.priceTag,
       this.courseImage,
-      required this.completionStatus,
+      this.lessons,
       required this.onTap})
       : super(key: key);
 
@@ -34,10 +38,10 @@ class CourseCardView extends StatelessWidget {
                 clipBehavior: Clip.none,
                 children: [
                   CachedNetworkImage(
-                    imageUrl:
-                        'http://www.5ants.com/wp-content/uploads/2016/11/pcgame2-1-830x420.jpg',
-                    fit: BoxFit.cover,
+                    imageUrl: courseBanner.toString(),
+                    fit: BoxFit.fitWidth,
                     width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.10,
                     placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(
@@ -50,7 +54,7 @@ class CourseCardView extends StatelessWidget {
                         const Icon(Icons.error),
                   ),
                   Positioned.fill(
-                    bottom: -70,
+                    bottom: -75,
                     top: 0,
                     left: 0,
                     child: Container(
@@ -58,7 +62,7 @@ class CourseCardView extends StatelessWidget {
                       child: HexagonButton(
                         width: 28,
                         child: Text(
-                          'Free',
+                          priceTag.toString(),
                           style: TextStyle(
                             color: Theme.of(context).primaryColorDark,
                             fontSize: 10,
@@ -74,7 +78,7 @@ class CourseCardView extends StatelessWidget {
               ),
               const SizedBox(height: 18),
               Text(
-                courseTitle ?? 'Game Development With Unity 3D',
+                courseTitle.toString(),
                 maxLines: 2,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
@@ -84,10 +88,9 @@ class CourseCardView extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.visible),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               Text(
-                courseDescription ??
-                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo',
+                courseDescription.toString(),
                 maxLines: 3,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
@@ -95,11 +98,11 @@ class CourseCardView extends StatelessWidget {
                 style: TextStyle(fontSize: 10, color: Colors.grey[800]),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 12, 0, 2),
+                margin: const EdgeInsets.fromLTRB(0, 4, 0, 2),
                 child: Column(
                   children: [
                     Text(
-                      completionStatus ?? '0',
+                      lessons.toString(),
                       style: const TextStyle(fontSize: 11, color: Colors.grey),
                     ),
                     const Text(

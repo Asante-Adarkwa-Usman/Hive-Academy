@@ -2,13 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
+import 'package:get/get.dart';
+import 'package:hive_academy/controllers/courses/courses_controller.dart';
 import 'package:hive_academy/custom_widgets/catalog_card_view.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
 import 'package:hive_academy/custom_widgets/discount_card_view.dart';
 import 'package:hive_academy/route/route.dart' as router;
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  final CoursesController _coursesController = Get.put(CoursesController());
+  HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -148,26 +151,45 @@ class HomeView extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 10),
                     height: MediaQuery.of(context).size.height * 0.26,
                     width: MediaQuery.of(context).size.width,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return const CourseCardView(
-                          // onTap: () {
-                          //   Navigator.pushNamed(
-                          //       context, router.searchCoursePage);
-                          // },
-                          onTap: null,
-                          courseTitle: 'Back End with Node.js',
-                          courseDescription:
-                              'Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js Building backend Services with JavaScript and Node.js',
-                          completionStatus: '0',
+                    child: Obx(() {
+                      if (_coursesController.isLoading.value == true) {
+                        return const Center(
+                            child: CircularProgressIndicator.adaptive());
+                      }
+                      if (_coursesController.courses.isEmpty) {
+                        return const Center(
+                          child: Text('No courses available'),
                         );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(width: 10);
-                      },
-                    ),
+                      }
+                      return ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _coursesController.courses.length,
+                        itemBuilder: (context, index) {
+                          return CourseCardView(
+                            // onTap: () {
+                            //   Navigator.pushNamed(
+                            //       context, router.searchCoursePage);
+                            // },
+                            onTap: null,
+                            courseBanner: _coursesController.courses[index]
+                                ['banner'],
+
+                            courseTitle: _coursesController.courses[index]
+                                ['name'],
+                            courseDescription: _coursesController.courses[index]
+                                ['overview'],
+                            lessons: "0",
+
+                            priceTag: _coursesController.courses[index]
+                                    ['base_price']
+                                .toString(),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(width: 10);
+                        },
+                      );
+                    }),
                   ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(12, 8, 0, 8),
@@ -180,17 +202,30 @@ class HomeView extends StatelessWidget {
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.60,
-                    child: GridView.builder(
-                      itemCount: 10,
-                      itemBuilder: (context, index) => const CatalogCard(
-                          onTap: null, subject: 'Artificial Intelligence(AI)'),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisSpacing: 14,
-                        mainAxisSpacing: 10,
-                        crossAxisCount: 2,
-                      ),
-                    ),
+                    child: Obx(() {
+                      if (_coursesController.isLoading.value == true) {
+                        return const Center(
+                            child: CircularProgressIndicator.adaptive());
+                      }
+                      if (_coursesController.courses.isEmpty) {
+                        return const Center(
+                          child: Text('No category courses available'),
+                        );
+                      }
+                      return GridView.builder(
+                        itemBuilder: (context, index) => CatalogCard(
+                            onTap: null,
+                            subject: _coursesController.courses[index]
+                                ['category']['name']),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisSpacing: 14,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 2,
+                        ),
+                        itemCount: _coursesController.courses.length,
+                      );
+                    }),
                   )
                 ],
               ),
