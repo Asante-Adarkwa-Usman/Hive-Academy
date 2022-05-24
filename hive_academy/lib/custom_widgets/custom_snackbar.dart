@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-customSnackbar(title, message, type) {
-  Get.snackbar(title, message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: type == 'success'
-          ? Colors.green
-          : type == 'error'
-              ? Colors.red
-              : Colors.orange,
-      borderRadius: 10,
-      margin: const EdgeInsets.all(10),
-      duration: const Duration(seconds: 3),
-      colorText: Colors.white);
+customSnackbar(String title, String message, String type) {
+  return GetSnackBar(
+      title: title,
+      message: message,
+      backgroundColor: type == 'error' ? Colors.redAccent : Colors.greenAccent,
+      snackPosition: SnackPosition.TOP,
+      snackStyle: SnackStyle.GROUNDED,
+      duration: const Duration(seconds: 4));
 }

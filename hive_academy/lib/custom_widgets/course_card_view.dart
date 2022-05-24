@@ -91,7 +91,7 @@ class CourseCardView extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 courseDescription.toString(),
-                maxLines: 3,
+                maxLines: 2,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
