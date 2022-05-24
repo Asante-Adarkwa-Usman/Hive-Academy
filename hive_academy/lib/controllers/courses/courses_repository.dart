@@ -5,10 +5,14 @@ import 'package:hive_academy/utils/url.dart';
 class CoursesRepository {
   var url = coursesURL;
   loadCoursesFromApi() async {
-    var response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
+    try {
+      var response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Failed to load courses');
+      }
+    } catch (e) {
       throw Exception('Failed to load courses');
     }
   }
