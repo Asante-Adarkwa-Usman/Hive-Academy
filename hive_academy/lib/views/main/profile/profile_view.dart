@@ -2,8 +2,6 @@ import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hive_academy/custom_widgets/change_password_view.dart';
-import '../../../shared_widgets/custom_text_form_field.dart';
-import '../../../shared_widgets/primary_button.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -43,37 +41,14 @@ class ProfileView extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Profile',
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(183, 183, 183, 1))),
-                ),
-                Row(
-                  children: [
-                    const IconButton(
-                      onPressed: null,
-                      icon: Icon(Icons.edit_attributes_outlined,
-                          size: 30, color: Colors.white),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      child: IconButton(
-                        onPressed: () {
-                          _showBottomSheet(context);
-                        },
-                        icon: const Icon(Icons.edit_outlined,
-                            size: 30, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                )
-              ],
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              alignment: Alignment.topLeft,
+              child: const Text('Profile',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(183, 183, 183, 1))),
             ),
             const SizedBox(
               height: 20,
@@ -100,67 +75,102 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 60),
-            Column(
-              children: [
-                CustomTextFormField(
-                  label: const Text('First Name'),
-                  hint: 'first name',
-                  keyboardType: TextInputType.text,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your first name';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomTextFormField(
-                  label: const Text('Last Name'),
-                  hint: 'last name',
-                  keyboardType: TextInputType.text,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your last name';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomTextFormField(
-                  label: const Text('Phone Number'),
-                  hint: 'phone number',
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your phone number';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomTextFormField(
-                  label: const Text('Email'),
-                  hint: 'email',
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    return null;
-                  },
-                ),
-              ],
+            // const SizedBox(height: 10),
+
+            //const SizedBox(height: 20),
+
+            const SizedBox(height: 40),
+            Container(
+              margin: const EdgeInsets.only(left: 20),
+              child: Column(
+                children: [
+                  const ProfileDetail(
+                    detailText: 'First Name',
+                    detailValue: 'John Doe',
+                  ),
+                  const SizedBox(height: 30),
+                  const ProfileDetail(
+                    detailText: 'Last Name',
+                    detailValue: 'Usman',
+                  ),
+                  const SizedBox(height: 30),
+                  const ProfileDetail(
+                    detailText: 'Email',
+                    detailValue: 'usman@kumasihive.com',
+                  ),
+                  const SizedBox(height: 30),
+                  const ProfileDetail(
+                    detailText: 'Contact',
+                    detailValue: '+62 812-1234-1234',
+                  ),
+                  const SizedBox(height: 100),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          print('Logout');
+                        },
+                        child: const Text(
+                          'Logout',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 237, 90, 90),
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          _showBottomSheet(context);
+                        },
+                        child: const Text(
+                          'Change Password',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(183, 93, 93, 82),
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 30),
-            PrimaryButton(
-                buttonColor: Theme.of(context).primaryColor,
-                text: 'Update',
-                textColor: Colors.white,
-                onPressed: () {}),
           ],
         ),
       ),
     ))));
+  }
+}
+
+class ProfileDetail extends StatelessWidget {
+  final String? detailText;
+  final String? detailValue;
+  const ProfileDetail({
+    Key? key,
+    required this.detailText,
+    required this.detailValue,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(children: [
+          Text(detailText.toString(),
+              style: TextStyle(
+                  color: Theme.of(context).primaryColorDark,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600)),
+          const SizedBox(width: 25),
+          Text(detailValue.toString(),
+              style: TextStyle(
+                  color: Theme.of(context).primaryColorDark,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400)),
+        ]),
+      ],
+    );
   }
 }
