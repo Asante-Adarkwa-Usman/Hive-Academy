@@ -4,8 +4,10 @@ import 'package:hive_academy/views/auth/onboarding_view.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 import 'package:hive_academy/route/route.dart' as router;
 import 'controllers/network/network_binding.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
