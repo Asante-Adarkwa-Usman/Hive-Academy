@@ -9,10 +9,12 @@ import 'package:hive_academy/custom_widgets/catalog_card_view.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
 import 'package:hive_academy/custom_widgets/discount_card_view.dart';
 import 'package:hive_academy/route/route.dart' as router;
+import 'package:hive_academy/utils/storage_box/course_constant.dart';
 
 class HomeView extends StatelessWidget {
   final CoursesController _coursesController = Get.put(CoursesController());
   final NetworkManager _networkManager = Get.find<NetworkManager>();
+  final List courses = courseStorageBox.read('courses');
 
   HomeView({Key? key}) : super(key: key);
 
@@ -164,7 +166,7 @@ class HomeView extends StatelessWidget {
                             return const Center(
                                 child: CircularProgressIndicator.adaptive());
                           }
-                          if (_coursesController.courses.isEmpty) {
+                          if (courses.isEmpty) {
                             return const Center(
                               child: Text('No courses available'),
                             );
@@ -172,7 +174,7 @@ class HomeView extends StatelessWidget {
 
                           return ListView.separated(
                             scrollDirection: Axis.horizontal,
-                            itemCount: _coursesController.courses.length,
+                            itemCount: courses.length,
                             itemBuilder: (context, index) {
                               return CourseCardView(
                                 // onTap: () {
@@ -180,20 +182,15 @@ class HomeView extends StatelessWidget {
                                 //       context, router.searchCoursePage);
                                 // },
                                 onTap: null,
-                                courseBanner: _coursesController.courses[index]
-                                    ['banner'],
+                                courseBanner: courses[index]['banner'],
 
-                                courseTitle: _coursesController.courses[index]
-                                    ['name'],
-                                courseDescription: _coursesController
-                                    .courses[index]['overview'],
-                                lessons: _coursesController.courses[index]
-                                        ['total_lessons']
-                                    .toString(),
+                                courseTitle: courses[index]['name'],
+                                courseDescription: courses[index]['overview'],
+                                lessons:
+                                    courses[index]['total_lessons'].toString(),
 
-                                priceTag: _coursesController.courses[index]
-                                        ['base_price']
-                                    .toString(),
+                                priceTag:
+                                    courses[index]['base_price'].toString(),
                               );
                             },
                             separatorBuilder: (context, index) {
@@ -218,7 +215,7 @@ class HomeView extends StatelessWidget {
                             return const Center(
                                 child: CircularProgressIndicator.adaptive());
                           }
-                          if (_coursesController.courses.isEmpty) {
+                          if (courses.isEmpty) {
                             return const Center(
                               child: Text('No category courses available'),
                             );
@@ -226,15 +223,14 @@ class HomeView extends StatelessWidget {
                           return GridView.builder(
                             itemBuilder: (context, index) => CatalogCard(
                                 onTap: null,
-                                subject: _coursesController.courses[index]
-                                    ['category']['name']),
+                                subject: courses[index]['category']['name']),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisSpacing: 14,
                               mainAxisSpacing: 10,
                               crossAxisCount: 2,
                             ),
-                            itemCount: _coursesController.courses.length,
+                            itemCount: courses.length,
                           );
                         }),
                       )

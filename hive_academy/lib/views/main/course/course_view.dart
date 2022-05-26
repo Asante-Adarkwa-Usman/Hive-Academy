@@ -5,10 +5,12 @@ import 'package:hive_academy/controllers/network/network_manager.dart';
 import 'package:hive_academy/custom_widgets/my_course_card_view.dart';
 //import 'package:hive_academy/custom_widgets/search_error_widget.dart';
 import 'package:hive_academy/route/route.dart' as router;
+import 'package:hive_academy/utils/storage_box/course_constant.dart';
 
 class CourseView extends StatelessWidget {
   final CoursesController coursesController = Get.put(CoursesController());
   final NetworkManager networkManager = Get.find<NetworkManager>();
+  final List courses = courseStorageBox.read('courses');
 
   CourseView({Key? key}) : super(key: key);
 
@@ -98,7 +100,7 @@ class CourseView extends StatelessWidget {
                                             .adaptive(),
                                       );
                                     }
-                                    if (coursesController.courses.isEmpty) {
+                                    if (courses.isEmpty) {
                                       return const Center(
                                         child: Text('No courses found',
                                             style: TextStyle(
@@ -107,19 +109,16 @@ class CourseView extends StatelessWidget {
                                       );
                                     }
                                     return GridView.builder(
-                                      itemCount:
-                                          coursesController.courses.length,
+                                      itemCount: courses.length,
                                       itemBuilder: (context, index) =>
                                           MyCourseCardView(
                                         onTap: () {
                                           Navigator.pushNamed(
                                               context, router.mainCoursePage);
                                         },
-                                        courseBanner: coursesController
-                                            .courses[index]['banner'],
-                                        completionPercentage: '25',
-                                        courseTitle: coursesController
-                                            .courses[index]['name'],
+                                        courseBanner: courses[index]['banner'],
+                                        completionPercentage: '0',
+                                        courseTitle: courses[index]['name'],
                                       ),
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
