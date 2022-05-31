@@ -1,7 +1,12 @@
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
+//import 'package:hive_academy/controllers/profile/profile_controller.dart';
 import 'package:hive_academy/custom_widgets/change_password_view.dart';
+import 'package:hive_academy/utils/storage_box/storage_constant.dart';
+import 'package:hive_academy/route/route.dart' as router;
+//import 'package:hive_academy/views/auth/login_view.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -75,10 +80,6 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
             ),
-            // const SizedBox(height: 10),
-
-            //const SizedBox(height: 20),
-
             const SizedBox(height: 40),
             Container(
               margin: const EdgeInsets.only(left: 20),
@@ -86,22 +87,20 @@ class ProfileView extends StatelessWidget {
                 children: [
                   const ProfileDetail(
                     detailText: 'First Name',
-                    detailValue: 'John Doe',
+                    detailValue: 'Usman Adarkwa',
                   ),
                   const SizedBox(height: 30),
                   const ProfileDetail(
                     detailText: 'Last Name',
-                    detailValue: 'Usman',
+                    detailValue: 'Asante',
                   ),
                   const SizedBox(height: 30),
                   const ProfileDetail(
-                    detailText: 'Email',
-                    detailValue: 'usman@kumasihive.com',
-                  ),
+                      detailText: 'Email', detailValue: 'usman@kumasihive.com'),
                   const SizedBox(height: 30),
                   const ProfileDetail(
                     detailText: 'Contact',
-                    detailValue: '+62 812-1234-1234',
+                    detailValue: '+2348166655555',
                   ),
                   const SizedBox(height: 100),
                   Row(
@@ -109,7 +108,25 @@ class ProfileView extends StatelessWidget {
                     children: [
                       TextButton(
                         onPressed: () {
-                          print('Logout');
+                          Get.defaultDialog(
+                            title: 'Logout ',
+                            content: const Text(
+                                'Are you sure you want to logout? This will delete all your data from this device.'),
+                            actions: [
+                              ElevatedButton(
+                                  child: const Text('Confirm',
+                                      style: TextStyle(color: Colors.white)),
+                                  onPressed: () {
+                                    storageBox.erase();
+                                    Get.offAllNamed(router.loginPage);
+                                  }),
+                              ElevatedButton(
+                                child: const Text('Cancel',
+                                    style: TextStyle(color: Colors.white)),
+                                onPressed: () => Get.back(),
+                              ),
+                            ],
+                          );
                         },
                         child: const Text(
                           'Logout',

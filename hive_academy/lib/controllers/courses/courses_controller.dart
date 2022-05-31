@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hive_academy/controllers/courses/courses_repository.dart';
 import 'package:hive_academy/controllers/network/network_manager.dart';
-import 'package:hive_academy/utils/storage_box/course_constant.dart';
+//import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 
 class CoursesController extends GetxController {
   CoursesRepository coursesRepository = CoursesRepository();
@@ -27,7 +27,7 @@ class CoursesController extends GetxController {
       courses = await coursesRepository.loadCoursesFromApi();
       isLoading.value = false;
       update();
-      courseStorageBox.write('courses', courses);
+      //storageBox.write('courses', courses);
     } catch (e) {
       isLoading.value = false;
       return 'Something went wrong';
