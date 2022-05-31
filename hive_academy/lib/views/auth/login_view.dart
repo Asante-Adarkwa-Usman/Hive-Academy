@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:hive_academy/controllers/network/network_manager.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
+//import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
 
 import '../parent_view.dart';
@@ -16,6 +18,9 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
+  final NetworkManager networkManager = Get.put(NetworkManager());
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(
@@ -63,6 +68,7 @@ class _LoginViewState extends State<LoginView> {
                       child: Column(
                         children: [
                           CustomTextFormField(
+                            controller: _emailController,
                             label: const Text('Email'),
                             hint: 'email',
                             validator: (value) {
@@ -74,6 +80,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                           const SizedBox(height: 20),
                           CustomTextFormField(
+                            controller: _passwordController,
                             label: const Text('Password'),
                             hint: 'password',
                             obscureText: true,
@@ -99,6 +106,12 @@ class _LoginViewState extends State<LoginView> {
                     // const SizedBox(height: 20),
                     PrimaryButton(
                       onPressed: () {
+                        // if (_formKey.currentState!.validate()) {
+                        //   storageBox.write('userEmail', _emailController.text);
+                        //   storageBox.write(
+                        //       'userPassword', _passwordController.text);
+                        //   Get.offAll(() => const ParentView());
+                        // }
                         Get.offAll(() => const ParentView());
                       },
                       text: 'Login',

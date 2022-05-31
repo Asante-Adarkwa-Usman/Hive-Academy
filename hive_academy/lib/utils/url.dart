@@ -2,6 +2,7 @@ const baseURL = 'https://hive-academy-mlynshzqlq-uc.a.run.app/api/v2';
 const instructorsURL = '$baseURL/instructors';
 const coursesURL = '$baseURL/courses';
 const usersURL = '$baseURL/users';
+const userProfileURL = '$baseURL/user';
 const categoryURL = '$baseURL/categories';
 const transactionURL = '$baseURL/transactions/initialize';
 const paymentURL = '$baseURL/transactions/webhook';
