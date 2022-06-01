@@ -10,22 +10,19 @@ class UserTokenRepository {
     String userPassword = storageBox.read('userPassword');
 
     try {
-      var tokenKey = await http.post(
+      var tokenKey = await http.get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
               'Basic ' + base64Encode(utf8.encode('$userEmail:$userPassword'))
         },
-        body: jsonEncode({
-          'email': userEmail,
-          'password': userPassword,
-        }),
       );
-
       if (tokenKey.statusCode == 200) {
-        storageBox.write('tokenKey', tokenKey.body);
-        return json.decode(tokenKey.body);
+        Map<String, dynamic> userToken = json.decode(tokenKey.body);
+        print(userToken);
+        storageBox.write('tokenKey', userToken);
+        return userToken;
       } else {
         throw Exception('Failed to load user token');
       }

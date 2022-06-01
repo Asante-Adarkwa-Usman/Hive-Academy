@@ -10,11 +10,13 @@ import 'package:hive_academy/custom_widgets/catalog_card_view.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
 import 'package:hive_academy/custom_widgets/discount_card_view.dart';
 import 'package:hive_academy/route/route.dart' as router;
+import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 //import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 
 class HomeView extends StatelessWidget {
   final CoursesController _coursesController = Get.put(CoursesController());
   final NetworkManager _networkManager = Get.find<NetworkManager>();
+  final userDetail = storageBox.read('userDetails');
 
   HomeView({Key? key}) : super(key: key);
 
@@ -59,7 +61,7 @@ class HomeView extends StatelessWidget {
                                   Container(
                                     margin: const EdgeInsets.only(left: 20),
                                     child: Text(
-                                      'Mary',
+                                      userDetail['firstname'],
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold,
@@ -108,8 +110,7 @@ class HomeView extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
                                           child: CachedNetworkImage(
-                                            imageUrl:
-                                                'https://ichef.bbci.co.uk/news/490/cpsprodpb/C870/production/_112921315_gettyimages-876284806.jpg',
+                                            imageUrl: userDetail['profile_pic'],
                                             placeholder: (context, url) =>
                                                 const CircleAvatar(
                                               backgroundColor: Colors.amber,

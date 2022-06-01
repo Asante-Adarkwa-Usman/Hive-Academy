@@ -1,6 +1,7 @@
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 //import 'package:hive_academy/controllers/profile/profile_controller.dart';
 import 'package:hive_academy/custom_widgets/change_password_view.dart';
@@ -9,8 +10,8 @@ import 'package:hive_academy/route/route.dart' as router;
 //import 'package:hive_academy/views/auth/login_view.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key}) : super(key: key);
-
+  ProfileView({Key? key}) : super(key: key);
+  final userDetail = storageBox.read('userDetails');
   //Edit Profile
   void _showBottomSheet(context) {
     showModalBottomSheet(
@@ -66,8 +67,8 @@ class ProfileView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: CachedNetworkImage(
-                    imageUrl:
-                        'https://ichef.bbci.co.uk/news/490/cpsprodpb/C870/production/_112921315_gettyimages-876284806.jpg',
+                    imageUrl: userDetail['profile_pic'] ??
+                        'https://picsum.photos/200',
                     placeholder: (context, url) => const CircleAvatar(
                       backgroundColor: Color.fromARGB(255, 249, 248, 245),
                       radius: 45,
@@ -85,22 +86,23 @@ class ProfileView extends StatelessWidget {
               margin: const EdgeInsets.only(left: 20),
               child: Column(
                 children: [
-                  const ProfileDetail(
+                  ProfileDetail(
                     detailText: 'First Name',
-                    detailValue: 'Usman Adarkwa',
+                    detailValue: '${userDetail['firstname']}',
                   ),
                   const SizedBox(height: 30),
-                  const ProfileDetail(
+                  ProfileDetail(
                     detailText: 'Last Name',
-                    detailValue: 'Asante',
+                    detailValue: '${userDetail['lastname']}',
                   ),
                   const SizedBox(height: 30),
-                  const ProfileDetail(
-                      detailText: 'Email', detailValue: 'usman@kumasihive.com'),
+                  ProfileDetail(
+                      detailText: 'Email',
+                      detailValue: '${userDetail['email']}'),
                   const SizedBox(height: 30),
-                  const ProfileDetail(
+                  ProfileDetail(
                     detailText: 'Contact',
-                    detailValue: '+2348166655555',
+                    detailValue: '${userDetail['phone_number']}',
                   ),
                   const SizedBox(height: 100),
                   Row(
@@ -117,7 +119,17 @@ class ProfileView extends StatelessWidget {
                                   child: const Text('Confirm',
                                       style: TextStyle(color: Colors.white)),
                                   onPressed: () {
-                                    storageBox.erase();
+                                    storageBox.remove('userToken');
+                                    storageBox.remove('userDetails');
+                                    Fluttertoast.showToast(
+                                        msg: "Logout Successfully",
+                                        toastLength: Toast.LENGTH_LONG,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.black,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+
                                     Get.offAllNamed(router.loginPage);
                                   }),
                               ElevatedButton(
