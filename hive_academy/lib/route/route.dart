@@ -53,7 +53,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case forumPage:
       return MaterialPageRoute(builder: (context) => const ForumView());
     case profilePage:
-      return MaterialPageRoute(builder: (context) => const ProfileView());
+      return MaterialPageRoute(builder: (context) => ProfileView());
     case profileFromHomePage:
       return MaterialPageRoute(
           builder: (context) => const ProfileFromHomeView());

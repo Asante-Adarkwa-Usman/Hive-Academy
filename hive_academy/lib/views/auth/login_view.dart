@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hive_academy/controllers/network/network_manager.dart';
+import 'package:hive_academy/controllers/profile/profile_controller.dart';
+import 'package:hive_academy/custom_widgets/custom_snackbar.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
-//import 'package:hive_academy/utils/storage_box/storage_constant.dart';
+import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
 
 import '../parent_view.dart';
@@ -21,6 +24,9 @@ class _LoginViewState extends State<LoginView> {
   final NetworkManager networkManager = Get.put(NetworkManager());
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final ProfileController profileController = Get.put(ProfileController());
+  final userEmail = storageBox.read('userEmail');
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(
@@ -34,128 +40,163 @@ class _LoginViewState extends State<LoginView> {
               fit: BoxFit.cover,
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Visibility(
-                  visible: !isKeyboardVisible,
-                  child: Image.asset(
-                    'assets/images/loginIcon.png',
-                    height: MediaQuery.of(context).size.height * .40,
-                    width: MediaQuery.of(context).size.width * 0.80,
+          child: GetBuilder<NetworkManager>(builder: (_) {
+            return SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Visibility(
+                    visible: !isKeyboardVisible,
+                    child: Image.asset(
+                      'assets/images/loginIcon.png',
+                      height: MediaQuery.of(context).size.height * .40,
+                      width: MediaQuery.of(context).size.width * 0.80,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: isKeyboardVisible == true
-                          ? const EdgeInsets.only(left: 40, top: 40)
-                          : const EdgeInsets.only(left: 40),
-                      child: const Text(
-                        'Welcome',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromRGBO(120, 120, 120, 1)),
+                  const SizedBox(height: 10),
+                  Column(
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        margin: isKeyboardVisible == true
+                            ? const EdgeInsets.only(left: 40, top: 40)
+                            : const EdgeInsets.only(left: 40),
+                        child: const Text(
+                          'Welcome',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromRGBO(120, 120, 120, 1)),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          CustomTextFormField(
-                            controller: _emailController,
-                            label: const Text('Email'),
-                            hint: 'email',
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          CustomTextFormField(
-                            controller: _passwordController,
-                            label: const Text('Password'),
-                            hint: 'password',
-                            obscureText: true,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      margin: const EdgeInsets.only(right: 30),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text('Forgot Password?',
-                            style: TextStyle(color: Colors.grey[600])),
-                      ),
-                    ),
-                    // const SizedBox(height: 20),
-                    PrimaryButton(
-                      onPressed: () {
-                        // if (_formKey.currentState!.validate()) {
-                        //   storageBox.write('userEmail', _emailController.text);
-                        //   storageBox.write(
-                        //       'userPassword', _passwordController.text);
-                        //   Get.offAll(() => const ParentView());
-                        // }
-                        Get.offAll(() => const ParentView());
-                      },
-                      text: 'Login',
-                    ),
-                    const SizedBox(height: 5),
-                    Container(
-                      margin: const EdgeInsets.only(top: 10, right: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Text(
-                            "Don't have an account?",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          InkWell(
-                              onTap: () {
-                                Get.to(() => const RegisterView());
+                      const SizedBox(height: 20),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            CustomTextFormField(
+                              controller: _emailController,
+                              label: const Text('Email'),
+                              hint: 'email',
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                return null;
                               },
-                              child: Container(
-                                padding: const EdgeInsets.only(left: 4),
-                                child: Text(
-                                  "Create",
-                                  style: TextStyle(
-                                      color: Colors.grey[600],
-                                      decoration: TextDecoration.underline),
-                                ),
-                              )),
-                        ],
+                            ),
+                            const SizedBox(height: 20),
+                            CustomTextFormField(
+                              controller: _passwordController,
+                              label: const Text('Password'),
+                              hint: 'password',
+                              obscureText: true,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  margin: const EdgeInsets.only(left: 20),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    height: MediaQuery.of(context).size.height * .20,
-                    width: MediaQuery.of(context).size.width * 0.20,
+                      Container(
+                        alignment: Alignment.centerRight,
+                        margin: const EdgeInsets.only(right: 30),
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text('Forgot Password?',
+                              style: TextStyle(color: Colors.grey[600])),
+                        ),
+                      ),
+                      // const SizedBox(height: 20),
+                      PrimaryButton(
+                        onPressed: () {
+                          if (networkManager.connectionStatus == 0) {
+                            Fluttertoast.showToast(
+                                msg: 'No internet connection',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                          if (_formKey.currentState!.validate()) {
+                            storageBox.write(
+                                'userEmail', _emailController.text);
+                            storageBox.write(
+                                'userPassword', _passwordController.text);
+
+                            if (_emailController.text == userEmail) {
+                              Fluttertoast.showToast(
+                                msg: 'Login Successful',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.SNACKBAR,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                              Get.offAll(() => const ParentView());
+                            } else {
+                              Fluttertoast.showToast(
+                                msg:
+                                    'Login Failed, check credentials and try again',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                            }
+                          }
+                        },
+                        text: 'Login',
+                      ),
+                      const SizedBox(height: 5),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10, right: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            const Text(
+                              "Don't have an account?",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  Get.to(() => const RegisterView());
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.only(left: 4),
+                                  child: Text(
+                                    "Create",
+                                    style: TextStyle(
+                                        color: Colors.grey[600],
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    margin: const EdgeInsets.only(left: 20),
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      height: MediaQuery.of(context).size.height * .20,
+                      width: MediaQuery.of(context).size.width * 0.20,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
         ),
       ),
     );

@@ -19,7 +19,7 @@ class _ParentViewState extends State<ParentView> {
     HomeView(),
     CourseView(),
     const CommunityView(),
-    const ProfileView()
+    ProfileView()
   ];
   @override
   Widget build(BuildContext context) {
