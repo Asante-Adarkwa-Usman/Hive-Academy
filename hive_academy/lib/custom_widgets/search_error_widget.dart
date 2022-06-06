@@ -45,6 +45,7 @@ class SearchErrorWidget extends StatelessWidget {
           Visibility(
             visible: name == 'search' ? false : true,
             child: PrimaryButton(
+                isLoading: false,
                 text: 'Go to courses',
                 fontSize: 15,
                 textColor: Theme.of(context).primaryColorDark,

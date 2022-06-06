@@ -7,12 +7,14 @@ class PrimaryButton extends StatelessWidget {
   final double? height;
   final double? width;
   final double? fontSize;
+  final bool? isLoading;
   final GestureTapCallback? onPressed;
   const PrimaryButton(
       {Key? key,
       this.buttonColor,
       this.textColor,
       required this.text,
+      required this.isLoading,
       this.height,
       this.width,
       this.fontSize,
@@ -31,11 +33,13 @@ class PrimaryButton extends StatelessWidget {
               primary: buttonColor ?? Theme.of(context).primaryColor,
             ),
             onPressed: onPressed,
-            child: Text(text,
-                style: TextStyle(
-                    fontSize: fontSize ?? 20,
-                    fontWeight: FontWeight.bold,
-                    color: textColor ?? Colors.white))),
+            child: isLoading == true
+                ? const CircularProgressIndicator.adaptive()
+                : Text(text,
+                    style: TextStyle(
+                        fontSize: fontSize ?? 20,
+                        fontWeight: FontWeight.bold,
+                        color: textColor ?? Colors.white))),
       ),
     );
   }

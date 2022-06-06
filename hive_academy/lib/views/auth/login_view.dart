@@ -24,8 +24,7 @@ class _LoginViewState extends State<LoginView> {
   final NetworkManager networkManager = Get.put(NetworkManager());
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final ProfileController profileController = Get.put(ProfileController());
-  final userEmail = storageBox.read('userEmail');
+  final ProfileController _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +81,7 @@ class _LoginViewState extends State<LoginView> {
                                 if (value!.isEmpty) {
                                   return 'Please enter your email';
                                 }
+
                                 return null;
                               },
                             ),
@@ -95,6 +95,7 @@ class _LoginViewState extends State<LoginView> {
                                 if (value!.isEmpty) {
                                   return 'Please enter your password';
                                 }
+
                                 return null;
                               },
                             ),
@@ -112,7 +113,36 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       // const SizedBox(height: 20),
                       PrimaryButton(
+                        isLoading: _profileController.isLoading.value,
                         onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _profileController.loadUserProfileFromRepo(
+                                _emailController.text,
+                                _passwordController.text);
+                            var user = storageBox.read('userProfile');
+                            if (user != null) {
+                              Get.offAll(() => const ParentView());
+                              Fluttertoast.showToast(
+                                  msg: 'Login Successful',
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.grey.shade800,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            } else {
+                              Fluttertoast.showToast(
+                                msg:
+                                    'Login Failed, User not found or credentials are incorrect',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                            }
+                          }
                           if (networkManager.connectionStatus == 0) {
                             Fluttertoast.showToast(
                                 msg: 'No internet connection',
@@ -123,39 +153,10 @@ class _LoginViewState extends State<LoginView> {
                                 textColor: Colors.white,
                                 fontSize: 16.0);
                           }
-                          if (_formKey.currentState!.validate()) {
-                            storageBox.write(
-                                'userEmail', _emailController.text);
-                            storageBox.write(
-                                'userPassword', _passwordController.text);
-
-                            if (_emailController.text == userEmail) {
-                              Fluttertoast.showToast(
-                                msg: 'Login Successful',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.SNACKBAR,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.green,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                              Get.offAll(() => const ParentView());
-                            } else {
-                              Fluttertoast.showToast(
-                                msg:
-                                    'Login Failed, check credentials and try again',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                            }
-                          }
                         },
                         text: 'Login',
                       ),
+
                       const SizedBox(height: 5),
                       Container(
                         margin: const EdgeInsets.only(top: 10, right: 40),
