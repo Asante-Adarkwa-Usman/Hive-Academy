@@ -70,7 +70,7 @@ class ChangePasswordView extends StatelessWidget {
               },
             ),
             const SizedBox(height: 30),
-            PrimaryButton(text: 'Reset', onPressed: () {})
+            PrimaryButton(isLoading: false, text: 'Reset', onPressed: () {})
           ],
         ));
   }

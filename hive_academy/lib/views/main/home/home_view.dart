@@ -16,7 +16,7 @@ import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 class HomeView extends StatelessWidget {
   final CoursesController _coursesController = Get.put(CoursesController());
   final NetworkManager _networkManager = Get.find<NetworkManager>();
-  final userDetail = storageBox.read('userDetails');
+  Map<String, dynamic> userDetails = storageBox.read('userProfile');
 
   HomeView({Key? key}) : super(key: key);
 
@@ -61,7 +61,7 @@ class HomeView extends StatelessWidget {
                                   Container(
                                     margin: const EdgeInsets.only(left: 20),
                                     child: Text(
-                                      userDetail['firstname'],
+                                      userDetails['firstname'],
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold,
@@ -110,7 +110,8 @@ class HomeView extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
                                           child: CachedNetworkImage(
-                                            imageUrl: userDetail['profile_pic'],
+                                            imageUrl:
+                                                userDetails['profile_pic'],
                                             placeholder: (context, url) =>
                                                 const CircleAvatar(
                                               backgroundColor: Colors.amber,

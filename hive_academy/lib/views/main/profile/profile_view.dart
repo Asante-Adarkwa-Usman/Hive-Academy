@@ -11,7 +11,7 @@ import 'package:hive_academy/route/route.dart' as router;
 
 class ProfileView extends StatelessWidget {
   ProfileView({Key? key}) : super(key: key);
-  final userDetail = storageBox.read('userDetails');
+  final userDetail = storageBox.read('userProfile');
   //Edit Profile
   void _showBottomSheet(context) {
     showModalBottomSheet(
@@ -120,7 +120,9 @@ class ProfileView extends StatelessWidget {
                                       style: TextStyle(color: Colors.white)),
                                   onPressed: () {
                                     storageBox.remove('userToken');
-                                    storageBox.remove('userDetails');
+                                    storageBox.remove('userProfile');
+
+                                    Get.toNamed(router.loginPage);
                                     Fluttertoast.showToast(
                                         msg: "Logout Successfully",
                                         toastLength: Toast.LENGTH_LONG,
@@ -129,8 +131,6 @@ class ProfileView extends StatelessWidget {
                                         backgroundColor: Colors.black,
                                         textColor: Colors.white,
                                         fontSize: 16.0);
-
-                                    Get.offAllNamed(router.loginPage);
                                   }),
                               ElevatedButton(
                                 child: const Text('Cancel',

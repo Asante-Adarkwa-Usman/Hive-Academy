@@ -230,6 +230,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   child: Container(
                                     margin: const EdgeInsets.only(left: 30),
                                     child: PrimaryButton(
+                                      isLoading: false,
                                       text: 'Complete',
                                       onPressed: () {
                                         Get.toNamed(router.loginPage);

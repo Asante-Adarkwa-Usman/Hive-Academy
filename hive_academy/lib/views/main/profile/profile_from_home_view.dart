@@ -124,6 +124,7 @@ class ProfileFromHomeView extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             PrimaryButton(
+                isLoading: false,
                 buttonColor: Theme.of(context).primaryColor,
                 text: 'Update',
                 textColor: Colors.white,

@@ -127,6 +127,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 ),
                 const SizedBox(height: 10),
                 PrimaryButton(
+                    isLoading: false,
                     buttonColor: Theme.of(context).primaryColor,
                     text: 'Login',
                     textColor: Colors.white,
@@ -167,6 +168,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 ),
                 const SizedBox(height: 10),
                 PrimaryButton(
+                    isLoading: false,
                     buttonColor: Colors.white,
                     textColor: Theme.of(context).primaryColorDark,
                     text: 'Join Us',
