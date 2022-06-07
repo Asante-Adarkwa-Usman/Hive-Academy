@@ -4,10 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hive_academy/controllers/network/network_manager.dart';
 import 'package:hive_academy/controllers/profile/profile_controller.dart';
-import 'package:hive_academy/custom_widgets/custom_snackbar.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
-import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
 
 import '../parent_view.dart';
@@ -22,9 +20,14 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final NetworkManager networkManager = Get.put(NetworkManager());
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final ProfileController _profileController = Get.put(ProfileController());
+
+  final RegExp emailRegexp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+  bool isLoading = false;
+  bool isSuccessful = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +84,9 @@ class _LoginViewState extends State<LoginView> {
                                 if (value!.isEmpty) {
                                   return 'Please enter your email';
                                 }
-
+                                if (!emailRegexp.hasMatch(value)) {
+                                  return 'Email is invalid';
+                                }
                                 return null;
                               },
                             ),
@@ -95,7 +100,9 @@ class _LoginViewState extends State<LoginView> {
                                 if (value!.isEmpty) {
                                   return 'Please enter your password';
                                 }
-
+                                if (value.length < 8) {
+                                  return 'Password should be 8 characters or more';
+                                }
                                 return null;
                               },
                             ),
@@ -113,15 +120,21 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       // const SizedBox(height: 20),
                       PrimaryButton(
-                        isLoading: _profileController.isLoading.value,
-                        onPressed: () {
+                        isLoading: isLoading,
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            _profileController.loadUserProfileFromRepo(
-                                _emailController.text,
-                                _passwordController.text);
-                            var user = storageBox.read('userProfile');
-                            if (user != null) {
-                              Get.offAll(() => const ParentView());
+                            setState(() {
+                              isLoading = true;
+                            });
+                            isSuccessful = await _profileController
+                                .loadUserProfileFromRepo(_emailController.text,
+                                    _passwordController.text);
+                            setState(() {
+                              isLoading = false;
+                            });
+
+                            if (isSuccessful == true) {
+                              //success
                               Fluttertoast.showToast(
                                   msg: 'Login Successful',
                                   toastLength: Toast.LENGTH_LONG,
@@ -130,7 +143,9 @@ class _LoginViewState extends State<LoginView> {
                                   backgroundColor: Colors.grey.shade800,
                                   textColor: Colors.white,
                                   fontSize: 16.0);
+                              Get.offAll(() => const ParentView());
                             } else {
+                              //error
                               Fluttertoast.showToast(
                                 msg:
                                     'Login Failed, User not found or credentials are incorrect',
@@ -142,10 +157,9 @@ class _LoginViewState extends State<LoginView> {
                                 fontSize: 16.0,
                               );
                             }
-                          }
-                          if (networkManager.connectionStatus == 0) {
+                          } else {
                             Fluttertoast.showToast(
-                                msg: 'No internet connection',
+                                msg: 'Email and Password are required!',
                                 toastLength: Toast.LENGTH_LONG,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,

@@ -23,8 +23,9 @@ class ProfileRepository {
         },
       );
       if (userProfile.statusCode == 200) {
-        Map<String, dynamic> userProfileMap = json.decode(userProfile.body);
-        return userProfileMap;
+        var userDetails = json.decode(userProfile.body);
+
+        return userDetails;
       } else {
         throw Exception('Failed to load user profile');
       }

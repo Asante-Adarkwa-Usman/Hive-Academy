@@ -16,7 +16,7 @@ import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 class HomeView extends StatelessWidget {
   final CoursesController _coursesController = Get.put(CoursesController());
   final NetworkManager _networkManager = Get.find<NetworkManager>();
-  Map<String, dynamic> userDetails = storageBox.read('userProfile');
+  final userProfile = storageBox.read('userProfile');
 
   HomeView({Key? key}) : super(key: key);
 
@@ -61,7 +61,7 @@ class HomeView extends StatelessWidget {
                                   Container(
                                     margin: const EdgeInsets.only(left: 20),
                                     child: Text(
-                                      userDetails['firstname'],
+                                      userProfile['firstname'],
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold,
@@ -100,10 +100,7 @@ class HomeView extends StatelessWidget {
                                     margin:
                                         const EdgeInsets.fromLTRB(0, 15, 10, 0),
                                     child: InkWell(
-                                      onTap: () {
-                                        Navigator.pushNamed(context,
-                                            router.profileFromHomePage);
-                                      },
+                                      onTap: () {},
                                       child: DashedCircle(
                                         color:
                                             Theme.of(context).primaryColorDark,
@@ -111,7 +108,7 @@ class HomeView extends StatelessWidget {
                                           padding: const EdgeInsets.all(5.0),
                                           child: CachedNetworkImage(
                                             imageUrl:
-                                                userDetails['profile_pic'],
+                                                userProfile['profile_pic'],
                                             placeholder: (context, url) =>
                                                 const CircleAvatar(
                                               backgroundColor: Colors.amber,
@@ -198,6 +195,7 @@ class HomeView extends StatelessWidget {
                                     //   Navigator.pushNamed(
                                     //       context, router.searchCoursePage);
                                     // },
+                                    userCourse: false,
                                     onTap: null,
                                     courseBanner: _coursesController
                                         .courses[index]['banner'],
@@ -245,9 +243,10 @@ class HomeView extends StatelessWidget {
                               }
                               return GridView.builder(
                                 itemBuilder: (context, index) => CatalogCard(
-                                    onTap: null,
-                                    subject: _coursesController.courses[index]
-                                        ['category']['name']),
+                                  onTap: null,
+                                  subject: _coursesController.courses[index]
+                                      ['name'],
+                                ),
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisSpacing: 14,

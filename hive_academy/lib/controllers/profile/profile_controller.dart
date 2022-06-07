@@ -5,25 +5,24 @@ import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 class ProfileController extends GetxController {
   final ProfileRepository profileRepository = ProfileRepository();
 
-  RxBool isLoading = false.obs;
-  RxBool isLoginSuccess = false.obs;
+  final RxBool isLoading = false.obs;
+  final RxBool isSuccessful = false.obs;
 
   loadUserProfileFromRepo(String email, String password) async {
     isLoading.value = true;
     try {
-      Map<String, dynamic> userProfile =
+      var userDetails =
           await profileRepository.loadUserProfileFromApi(email, password);
+      storageBox.write('userDetails', userDetails);
       isLoading.value = false;
-      isLoginSuccess.value = true;
-      storageBox.write('userProfile', userProfile);
+      isSuccessful.value = true;
       update();
 
-      print(isLoginSuccess.value);
-      print(userProfile);
+      print(userDetails);
+
+      return isSuccessful.value;
     } catch (e) {
-      isLoading.value = false;
-      isLoginSuccess.value = false;
-      return 'Something went wrong';
+      return isSuccessful.value;
     }
   }
 }
