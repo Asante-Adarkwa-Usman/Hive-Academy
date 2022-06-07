@@ -12,7 +12,7 @@ class MyCourseCardView extends StatelessWidget {
   const MyCourseCardView(
       {Key? key,
       required this.courseTitle,
-      required this.courseBanner,
+      this.courseBanner,
       this.courseImage,
       this.completionPercentage,
       this.lessonCount,

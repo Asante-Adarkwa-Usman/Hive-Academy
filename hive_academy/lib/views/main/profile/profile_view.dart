@@ -67,8 +67,7 @@ class ProfileView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: CachedNetworkImage(
-                    imageUrl: userDetail['profile_pic'] ??
-                        'https://picsum.photos/200',
+                    imageUrl: userDetail['profile_pic'],
                     placeholder: (context, url) => const CircleAvatar(
                       backgroundColor: Color.fromARGB(255, 249, 248, 245),
                       radius: 45,
@@ -120,7 +119,6 @@ class ProfileView extends StatelessWidget {
                                       style: TextStyle(color: Colors.white)),
                                   onPressed: () {
                                     storageBox.remove('userToken');
-                                    storageBox.remove('userProfile');
 
                                     Get.toNamed(router.loginPage);
                                     Fluttertoast.showToast(
