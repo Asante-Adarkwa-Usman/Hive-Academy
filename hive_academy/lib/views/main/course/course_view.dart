@@ -19,15 +19,22 @@ class CourseView extends StatefulWidget {
 
 class _CourseViewState extends State<CourseView> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final NetworkManager _networkManager = Get.find<NetworkManager>();
   final UserCoursesController _userCoursesController =
       Get.put(UserCoursesController());
 
-  final NetworkManager _networkManager = Get.find<NetworkManager>();
+  //bool isLoading = false;
+// loading user courses
+  // loadUserCourses() async {
+
+  //   print(userCourses);
+  //   return userCourses;
+  // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      top: false,
+      top: true,
       bottom: false,
       child: Scaffold(body: GetBuilder<NetworkManager>(builder: (_) {
         return _networkManager.connectionStatus == 1 ||
@@ -104,23 +111,6 @@ class _CourseViewState extends State<CourseView> {
                                   height: MediaQuery.of(context).size.height,
                                   width: MediaQuery.of(context).size.width,
                                   child: Obx(() {
-                                    if (_userCoursesController
-                                            .isLoading.value ==
-                                        true) {
-                                      return const Center(
-                                        child: CircularProgressIndicator
-                                            .adaptive(),
-                                      );
-                                    }
-                                    if (_userCoursesController
-                                        .userCourses.isEmpty) {
-                                      return const Center(
-                                        child: Text('No courses found',
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold)),
-                                      );
-                                    }
                                     if (_networkManager.connectionStatus == 0) {
                                       Fluttertoast.showToast(
                                           msg: "No Internet Connection",
@@ -131,20 +121,39 @@ class _CourseViewState extends State<CourseView> {
                                           textColor: Colors.white,
                                           fontSize: 16.0);
                                     }
+                                    List userCourses =
+                                        _userCoursesController.userCourses;
+
+                                    if (_userCoursesController
+                                            .isLoading.value ==
+                                        true) {
+                                      return const Center(
+                                        child: CircularProgressIndicator
+                                            .adaptive(),
+                                      );
+                                    }
+                                    if (userCourses.isEmpty) {
+                                      return const Center(
+                                        child: Text('No Courses found',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold)),
+                                      );
+                                    }
+
                                     return GridView.builder(
-                                      itemCount: _userCoursesController
-                                          .userCourses.length,
+                                      itemCount: userCourses.length,
                                       itemBuilder: (context, index) =>
-                                          CourseCardView(
-                                              userCourse: true,
-                                              courseTitle:
-                                                  _userCoursesController
-                                                          .userCourses[index]
-                                                      ['name'],
-                                              courseDescription:
-                                                  _userCoursesController
-                                                          .userCourses[index]
-                                                      ['description'],
+                                          MyCourseCardView(
+                                              courseTitle: userCourses[index]
+                                                  ['name'],
+                                              courseBanner: userCourses[index]
+                                                  ['banner'],
+                                              completionPercentage:
+                                                  userCourses[index]
+                                                      ['lessons_completed'],
+                                              lessonCount: userCourses[index]
+                                                  ['total_lessons'],
                                               onTap: () {}),
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(

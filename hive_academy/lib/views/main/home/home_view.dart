@@ -16,7 +16,7 @@ import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 class HomeView extends StatelessWidget {
   final CoursesController _coursesController = Get.put(CoursesController());
   final NetworkManager _networkManager = Get.find<NetworkManager>();
-  final userProfile = storageBox.read('userProfile');
+  final userProfile = storageBox.read('userDetailsKey');
 
   HomeView({Key? key}) : super(key: key);
 
@@ -165,16 +165,6 @@ class HomeView extends StatelessWidget {
                             height: MediaQuery.of(context).size.height * 0.26,
                             width: MediaQuery.of(context).size.width,
                             child: Obx(() {
-                              if (_coursesController.isLoading.value == true) {
-                                return const Center(
-                                    child:
-                                        CircularProgressIndicator.adaptive());
-                              }
-                              if (_coursesController.courses.isEmpty) {
-                                return const Center(
-                                  child: Text('No courses available'),
-                                );
-                              }
                               if (_networkManager.connectionStatus == 0) {
                                 Fluttertoast.showToast(
                                     msg: "No Internet Connection",
@@ -184,6 +174,17 @@ class HomeView extends StatelessWidget {
                                     backgroundColor: Colors.red,
                                     textColor: Colors.white,
                                     fontSize: 16.0);
+                              }
+
+                              if (_coursesController.isLoading.value == true) {
+                                return const Center(
+                                    child:
+                                        CircularProgressIndicator.adaptive());
+                              }
+                              if (_coursesController.courses.isEmpty) {
+                                return const Center(
+                                  child: Text('No courses available'),
+                                );
                               }
 
                               return ListView.separated(

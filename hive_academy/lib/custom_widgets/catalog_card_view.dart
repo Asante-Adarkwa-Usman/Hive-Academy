@@ -23,29 +23,23 @@ class CatalogCard extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Positioned.fill(
-                child: CachedNetworkImage(
-                  imageUrl: imgSrc ??
-                      'http://www.5ants.com/wp-content/uploads/2016/11/pcgame2-1-830x420.jpg',
+                child: Image.asset(
+                  'assets/images/category.png',
                   fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white,
-                      ),
-                      strokeWidth: 2,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
-              Positioned.fill(
-                child: Center(
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(6.0),
                   child: Text(
                     subject.toString(),
                     softWrap: true,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

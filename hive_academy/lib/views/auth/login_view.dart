@@ -6,8 +6,9 @@ import 'package:hive_academy/controllers/network/network_manager.dart';
 import 'package:hive_academy/controllers/profile/profile_controller.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
+import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 import 'package:hive_academy/views/auth/register_view.dart';
-
+import 'package:hive_academy/route/route.dart' as router;
 import '../parent_view.dart';
 
 class LoginView extends StatefulWidget {
@@ -28,6 +29,7 @@ class _LoginViewState extends State<LoginView> {
 
   bool isLoading = false;
   bool isSuccessful = false;
+  bool isLoggedOut = storageBox.read('isLoggedOut') ?? false;
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +124,21 @@ class _LoginViewState extends State<LoginView> {
                       PrimaryButton(
                         isLoading: isLoading,
                         onPressed: () async {
+                          if (isLoggedOut == true) {
+                            Get.offAllNamed(router.loginPage);
+                            Fluttertoast.showToast(
+                              msg:
+                                  'You have been logged out. Please login again.',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+
+                            isLoggedOut = false;
+                          }
                           if (_formKey.currentState!.validate()) {
                             setState(() {
                               isLoading = true;
@@ -135,6 +152,7 @@ class _LoginViewState extends State<LoginView> {
 
                             if (isSuccessful == true) {
                               //success
+                              Get.offAll(() => const ParentView());
                               Fluttertoast.showToast(
                                   msg: 'Login Successful',
                                   toastLength: Toast.LENGTH_LONG,
@@ -143,7 +161,6 @@ class _LoginViewState extends State<LoginView> {
                                   backgroundColor: Colors.grey.shade800,
                                   textColor: Colors.white,
                                   fontSize: 16.0);
-                              Get.offAll(() => const ParentView());
                             } else {
                               //error
                               Fluttertoast.showToast(
