@@ -9,9 +9,17 @@ import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 import 'package:hive_academy/route/route.dart' as router;
 //import 'package:hive_academy/views/auth/login_view.dart';
 
-class ProfileView extends StatelessWidget {
-  ProfileView({Key? key}) : super(key: key);
-  final userDetail = storageBox.read('userProfile');
+class ProfileView extends StatefulWidget {
+  const ProfileView({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  final userDetail = storageBox.read('userDetailsKey');
+  bool isLoggedOut = false;
+
   //Edit Profile
   void _showBottomSheet(context) {
     showModalBottomSheet(
@@ -119,13 +127,18 @@ class ProfileView extends StatelessWidget {
                                       style: TextStyle(color: Colors.white)),
                                   onPressed: () {
                                     storageBox.remove('userToken');
-
+                                    //storageBox.remove('userDetailsKey');
+                                    storageBox.erase();
+                                    isLoggedOut = true;
+                                    //store isLoggedOut in storageBox
+                                    storageBox.write(
+                                        'isLoggedOut', isLoggedOut);
                                     Get.toNamed(router.loginPage);
                                     Fluttertoast.showToast(
                                         msg: "Logout Successfully",
                                         toastLength: Toast.LENGTH_LONG,
                                         gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
+                                        timeInSecForIosWeb: 2,
                                         backgroundColor: Colors.black,
                                         textColor: Colors.white,
                                         fontSize: 16.0);
@@ -133,7 +146,11 @@ class ProfileView extends StatelessWidget {
                               ElevatedButton(
                                 child: const Text('Cancel',
                                     style: TextStyle(color: Colors.white)),
-                                onPressed: () => Get.back(),
+                                onPressed: () {
+                                  isLoggedOut = false;
+
+                                  Get.back();
+                                },
                               ),
                             ],
                           );

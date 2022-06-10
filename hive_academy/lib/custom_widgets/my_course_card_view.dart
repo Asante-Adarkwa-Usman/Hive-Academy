@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class MyCourseCardView extends StatelessWidget {
   final String? courseTitle;
-  final String? lessonCount;
+  final int? lessonCount;
   final String? courseImage;
-  final String? completionPercentage;
+  final int? completionPercentage;
   final String? courseBanner;
 
   final void Function()? onTap;
@@ -81,7 +81,7 @@ class MyCourseCardView extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            '${completionPercentage ?? '10'}%',
+                            '${completionPercentage ?? 10}%',
                             style: const TextStyle(
                               color: Colors.white,
                             ),
@@ -107,7 +107,7 @@ class MyCourseCardView extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(bottom: 6),
                         child: Text(
-                          '${lessonCount ?? '2'} Lessons',
+                          '${lessonCount ?? 0} Lessons',
                           style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,

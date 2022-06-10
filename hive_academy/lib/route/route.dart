@@ -41,7 +41,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case homePage:
       return MaterialPageRoute(builder: (context) => HomeView());
     case coursePage:
-      return MaterialPageRoute(builder: (context) => CourseView());
+      return MaterialPageRoute(builder: (context) => const CourseView());
     case mainCoursePage:
       return MaterialPageRoute(builder: (context) => const MainCourseView());
     case communityPage:
@@ -53,7 +53,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case forumPage:
       return MaterialPageRoute(builder: (context) => const ForumView());
     case profilePage:
-      return MaterialPageRoute(builder: (context) => ProfileView());
+      return MaterialPageRoute(builder: (context) => const ProfileView());
     case profileFromHomePage:
       return MaterialPageRoute(
           builder: (context) => const ProfileFromHomeView());

@@ -17,11 +17,9 @@ class UserCoursesController extends GetxController {
     try {
       userCourses = await _userCoursesRepository.loadUserCoursesFromApi();
       isLoading.value = false;
-      print(userCourses);
       update();
       return userCourses;
     } catch (e) {
-      isLoading.value = false;
       return 'Something went wrong';
     }
   }
