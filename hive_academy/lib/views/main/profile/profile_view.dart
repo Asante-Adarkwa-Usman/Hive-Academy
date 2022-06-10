@@ -10,7 +10,7 @@ import 'package:hive_academy/route/route.dart' as router;
 //import 'package:hive_academy/views/auth/login_view.dart';
 
 class ProfileView extends StatefulWidget {
-  ProfileView({Key? key}) : super(key: key);
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
@@ -128,9 +128,9 @@ class _ProfileViewState extends State<ProfileView> {
                                   onPressed: () {
                                     storageBox.remove('userToken');
                                     //storageBox.remove('userDetailsKey');
-                                    setState(() {
-                                      isLoggedOut = true;
-                                    });
+                                    storageBox.erase();
+                                    isLoggedOut = true;
+                                    //store isLoggedOut in storageBox
                                     storageBox.write(
                                         'isLoggedOut', isLoggedOut);
                                     Get.toNamed(router.loginPage);
@@ -138,7 +138,7 @@ class _ProfileViewState extends State<ProfileView> {
                                         msg: "Logout Successfully",
                                         toastLength: Toast.LENGTH_LONG,
                                         gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
+                                        timeInSecForIosWeb: 2,
                                         backgroundColor: Colors.black,
                                         textColor: Colors.white,
                                         fontSize: 16.0);
@@ -147,9 +147,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 child: const Text('Cancel',
                                     style: TextStyle(color: Colors.white)),
                                 onPressed: () {
-                                  setState(() {
-                                    isLoggedOut = false;
-                                  });
+                                  isLoggedOut = false;
 
                                   Get.back();
                                 },

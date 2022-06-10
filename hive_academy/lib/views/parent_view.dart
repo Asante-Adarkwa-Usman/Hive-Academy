@@ -17,9 +17,9 @@ class _ParentViewState extends State<ParentView> {
   int _currentIndex = 0;
   final List<Widget> _views = [
     HomeView(),
-    CourseView(),
+    const CourseView(),
     const CommunityView(),
-    ProfileView()
+    const ProfileView()
   ];
   @override
   Widget build(BuildContext context) {

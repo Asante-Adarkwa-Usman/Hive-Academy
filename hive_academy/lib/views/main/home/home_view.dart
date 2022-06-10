@@ -9,9 +9,7 @@ import 'package:hive_academy/controllers/network/network_manager.dart';
 import 'package:hive_academy/custom_widgets/catalog_card_view.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
 import 'package:hive_academy/custom_widgets/discount_card_view.dart';
-import 'package:hive_academy/route/route.dart' as router;
 import 'package:hive_academy/utils/storage_box/storage_constant.dart';
-//import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 
 class HomeView extends StatelessWidget {
   final CoursesController _coursesController = Get.put(CoursesController());

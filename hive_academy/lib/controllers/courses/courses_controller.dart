@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive_academy/controllers/courses/courses_repository.dart';
 import 'package:hive_academy/controllers/network/network_manager.dart';
-import 'package:hive_academy/utils/storage_box/storage_constant.dart';
-//import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 
 class CoursesController extends GetxController {
   CoursesRepository coursesRepository = CoursesRepository();

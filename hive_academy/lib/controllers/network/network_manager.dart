@@ -31,7 +31,7 @@ class NetworkManager extends GetxController {
     try {
       connectivityResult = await (_connectivity.checkConnectivity());
     } on PlatformException catch (e) {
-      print(e);
+      throw 'Failed to get connectivity: ${e.message}';
     }
     return _updateState(connectivityResult);
   }

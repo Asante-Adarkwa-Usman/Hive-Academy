@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:hive_academy/controllers/courses/courses_controller.dart';
 import 'package:hive_academy/controllers/courses/user_courses_controller.dart';
 import 'package:hive_academy/controllers/network/network_manager.dart';
-import 'package:hive_academy/custom_widgets/course_card_view.dart';
 import 'package:hive_academy/custom_widgets/my_course_card_view.dart';
-//import 'package:hive_academy/custom_widgets/search_error_widget.dart';
-import 'package:hive_academy/route/route.dart' as router;
-//import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 
 class CourseView extends StatefulWidget {
-  CourseView({Key? key}) : super(key: key);
+  const CourseView({Key? key}) : super(key: key);
 
   @override
   State<CourseView> createState() => _CourseViewState();
@@ -22,14 +17,6 @@ class _CourseViewState extends State<CourseView> {
   final NetworkManager _networkManager = Get.find<NetworkManager>();
   final UserCoursesController _userCoursesController =
       Get.put(UserCoursesController());
-
-  //bool isLoading = false;
-// loading user courses
-  // loadUserCourses() async {
-
-  //   print(userCourses);
-  //   return userCourses;
-  // }
 
   @override
   Widget build(BuildContext context) {
