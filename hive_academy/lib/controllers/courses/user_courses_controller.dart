@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 
 import 'user_courses_repository.dart';
 //import 'package:hive_academy/utils/storage_box/storage_constant.dart';
@@ -17,6 +18,8 @@ class UserCoursesController extends GetxController {
     try {
       userCourses = await _userCoursesRepository.loadUserCoursesFromApi();
       isLoading.value = false;
+      storageBox.write('userCourses', userCourses);
+      print(userCourses);
       update();
       return userCourses;
     } catch (e) {

@@ -127,6 +127,7 @@ class _ProfileViewState extends State<ProfileView> {
                                       style: TextStyle(color: Colors.white)),
                                   onPressed: () {
                                     storageBox.remove('userToken');
+                                    storageBox.remove('userCourses');
                                     //storageBox.remove('userDetailsKey');
                                     storageBox.erase();
                                     isLoggedOut = true;

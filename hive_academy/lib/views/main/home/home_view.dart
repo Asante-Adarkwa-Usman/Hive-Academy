@@ -10,6 +10,7 @@ import 'package:hive_academy/custom_widgets/catalog_card_view.dart';
 import 'package:hive_academy/custom_widgets/course_card_view.dart';
 import 'package:hive_academy/custom_widgets/discount_card_view.dart';
 import 'package:hive_academy/utils/storage_box/storage_constant.dart';
+import 'package:hive_academy/views/main/course/course_details/course_details.dart';
 
 class HomeView extends StatelessWidget {
   final CoursesController _coursesController = Get.put(CoursesController());
@@ -190,15 +191,20 @@ class HomeView extends StatelessWidget {
                                 itemCount: _coursesController.courses.length,
                                 itemBuilder: (context, index) {
                                   return CourseCardView(
-                                    // onTap: () {
-                                    //   Navigator.pushNamed(
-                                    //       context, router.searchCoursePage);
-                                    // },
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CourseDetails(
+                                            id: _coursesController
+                                                .courses[index]['course_id'],
+                                          ),
+                                        ),
+                                      );
+                                    },
                                     userCourse: false,
-                                    onTap: null,
                                     courseBanner: _coursesController
                                         .courses[index]['banner'],
-
                                     courseTitle: _coursesController
                                         .courses[index]['name'],
                                     courseDescription: _coursesController
@@ -206,7 +212,6 @@ class HomeView extends StatelessWidget {
                                     lessons: _coursesController.courses[index]
                                             ['total_lessons']
                                         .toString(),
-
                                     priceTag: _coursesController.courses[index]
                                             ['base_price']
                                         .toString(),

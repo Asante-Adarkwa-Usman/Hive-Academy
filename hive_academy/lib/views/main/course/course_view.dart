@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:hive_academy/controllers/courses/user_courses_controller.dart';
 import 'package:hive_academy/controllers/network/network_manager.dart';
 import 'package:hive_academy/custom_widgets/my_course_card_view.dart';
+import 'package:hive_academy/route/route.dart' as router;
+import 'package:hive_academy/views/main/course/course_details/course_details.dart';
 
 class CourseView extends StatefulWidget {
   const CourseView({Key? key}) : super(key: key);
@@ -141,7 +143,18 @@ class _CourseViewState extends State<CourseView> {
                                                       ['lessons_completed'],
                                               lessonCount: userCourses[index]
                                                   ['total_lessons'],
-                                              onTap: () {}),
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: ((context) =>
+                                                            CourseDetails(
+                                                                id: userCourses[
+                                                                            index]
+                                                                        [
+                                                                        'course_id']
+                                                                    .toString()))));
+                                              }),
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
