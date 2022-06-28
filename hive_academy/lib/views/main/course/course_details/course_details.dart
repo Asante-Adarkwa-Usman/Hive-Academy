@@ -172,7 +172,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                     .toString(),
                           ),
                           //Display course curriculum here
-                          const CourseCurriculum(),
+                          CourseCurriculum(),
                         ],
                       ),
                     ),
