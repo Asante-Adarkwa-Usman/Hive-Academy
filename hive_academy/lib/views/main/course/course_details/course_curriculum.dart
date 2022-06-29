@@ -1,41 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flexible_expansion_list/flexible_expansion_list.dart';
 import 'package:get/get.dart';
 import 'package:hive_academy/controllers/courses/courses_controller.dart';
+import 'package:hive_academy/controllers/courses/curriculum/expanded_item.dart';
+import 'package:hive_academy/controllers/courses/curriculum/index.dart';
 
 class CourseCurriculum extends StatelessWidget {
   CourseCurriculum({Key? key}) : super(key: key);
   final CoursesController _coursesController = Get.put(CoursesController());
+  final CourseCurriculumController _coursesCurriculumController =
+      Get.put(CourseCurriculumController());
 
   @override
   Widget build(BuildContext context) {
     var courses = _coursesController.courses;
-    return Container(
-        margin: const EdgeInsets.only(top: 20),
-        child: FlexibleExpansionList(
-            itemCount: courses[0]['curriculum'].length,
-            // headerBuilder: (BuildContext context, int index, bool isExpanded) {
-            //   return const ListTile(
-            //     title: Center(child: Text('')),
-            //   );
-            // },
-            fixedItemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text(courses[0]['curriculum'][index]['name']),
-                trailing: const Icon(Icons.keyboard_arrow_down),
-              );
-            },
-            expandedItemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: ListTile(
-                  title: Text(courses[0]['curriculum'][index]['lessons'][index]
-                      ['name']),
-                  subtitle: Text(courses[0]['curriculum'][index]['lessons']
-                      [index]['description']),
+    return SingleChildScrollView(
+        child: Container(
+      margin: const EdgeInsets.only(top: 20, bottom: 20),
+      child: Obx(() => ExpansionPanelList(
+          expansionCallback: (panelIndex, isExpanded) {
+            _coursesCurriculumController
+                .courseItems[panelIndex].isExpanded!.value = !isExpanded;
+          },
+          children: _coursesCurriculumController.courseItems
+              .map<ExpansionPanel>((ExpandedItemClass courseItems) {
+            return ExpansionPanel(
+                headerBuilder: ((context, isExpanded) {
+                  return ListTile(
+                    title: Text(courseItems.headerValue!),
+                  );
+                }),
+                body: ListTile(
+                  title: Text(courseItems.body!),
                 ),
-              );
-            }));
+                isExpanded: courseItems.isExpanded!.value);
+          }).toList())),
+    ));
   }
 }
 
