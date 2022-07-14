@@ -17,6 +17,7 @@ class UserTokenRepository {
       );
       if (userToken.statusCode == 200) {
         Map<String, dynamic> userTokenMap = json.decode(userToken.body);
+
         return userTokenMap;
       } else {
         throw Exception('Failed to load user token');
