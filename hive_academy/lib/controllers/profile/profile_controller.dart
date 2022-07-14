@@ -11,15 +11,16 @@ class ProfileController extends GetxController {
   loadUserProfileFromRepo(String email, String password) async {
     isLoading.value = true;
     try {
-      var userDetails =
+      var userDetail =
           await profileRepository.loadUserProfileFromApi(email, password);
-
-      isLoading.value = false;
-      isSuccessful.value = true;
+      if (userDetail != null) {
+        isLoading.value = false;
+        isSuccessful.value = true;
+      }
       update();
 
-      print(userDetails);
-      storageBox.write('userDetailsKey', userDetails);
+      print(userDetail);
+      storageBox.write('userDetailsKey', userDetail);
 
       return isSuccessful.value;
     } catch (e) {

@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:hive_academy/controllers/profile/profile_controller.dart';
 //import 'package:hive_academy/controllers/profile/profile_controller.dart';
 import 'package:hive_academy/custom_widgets/change_password_view.dart';
 import 'package:hive_academy/utils/storage_box/storage_constant.dart';
 import 'package:hive_academy/route/route.dart' as router;
+import 'package:http/http.dart';
 //import 'package:hive_academy/views/auth/login_view.dart';
 
 class ProfileView extends StatefulWidget {
@@ -18,7 +20,7 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   final userDetail = storageBox.read('userDetailsKey');
-  bool isLoggedOut = false;
+  final ProfileController _profileController = Get.put(ProfileController());
 
   //Edit Profile
   void _showBottomSheet(context) {
@@ -75,7 +77,8 @@ class _ProfileViewState extends State<ProfileView> {
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: CachedNetworkImage(
-                    imageUrl: userDetail['profile_pic'],
+                    imageUrl: userDetail['profile_pic'] ??
+                        "https://cdn-icons-png.flaticon.com/512/747/747376.png",
                     placeholder: (context, url) => const CircleAvatar(
                       backgroundColor: Color.fromARGB(255, 249, 248, 245),
                       radius: 45,
@@ -126,15 +129,15 @@ class _ProfileViewState extends State<ProfileView> {
                                   child: const Text('Confirm',
                                       style: TextStyle(color: Colors.white)),
                                   onPressed: () {
-                                    storageBox.remove('userToken');
-                                    storageBox.remove('userCourses');
-                                    //storageBox.remove('userDetailsKey');
                                     storageBox.erase();
-                                    isLoggedOut = true;
-                                    //store isLoggedOut in storageBox
-                                    storageBox.write(
-                                        'isLoggedOut', isLoggedOut);
-                                    Get.toNamed(router.loginPage);
+
+                                    //update profile controller
+                                    _profileController.isSuccessful.value =
+                                        false;
+
+                                    Get.offNamedUntil(
+                                        router.loginPage, (route) => false);
+
                                     Fluttertoast.showToast(
                                         msg: "Logout Successfully",
                                         toastLength: Toast.LENGTH_LONG,
@@ -148,8 +151,6 @@ class _ProfileViewState extends State<ProfileView> {
                                 child: const Text('Cancel',
                                     style: TextStyle(color: Colors.white)),
                                 onPressed: () {
-                                  isLoggedOut = false;
-
                                   Get.back();
                                 },
                               ),

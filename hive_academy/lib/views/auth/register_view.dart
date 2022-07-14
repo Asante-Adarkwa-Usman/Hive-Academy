@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_academy/shared_widgets/hexagon_button.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
+import 'package:hive_academy/utils/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:hive_academy/route/route.dart' as router;
+import 'package:unicons/unicons.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -16,6 +21,19 @@ class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   bool _passwordVisible = false;
   String view = "name";
+  final ImagePicker _imagePicker = ImagePicker();
+
+  File? _imageFile;
+
+  Future selectImage({ImageSource imageSource = ImageSource.camera}) async {
+    XFile? selectedFile = await _imagePicker.pickImage(source: imageSource);
+
+    var croppedFile = await myImageCropper(selectedFile!.path);
+
+    setState(() {
+      _imageFile = croppedFile as File?;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +65,70 @@ class _RegisterViewState extends State<RegisterView> {
               child: Column(
                 children: [
                   const SizedBox(height: 80),
-                  Image.asset('assets/images/registerLogo.png',
-                      width: 180, height: 160),
+                  // Image.asset('assets/images/registerLogo.png',
+                  //     width: 180, height: 160),
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(90),
+                      child: _imageFile == null
+                          ? Image.asset(
+                              'assets/images/user.png',
+                              width: 130,
+                              height: 130,
+                              fit: BoxFit.contain,
+                            )
+                          : Image.file(
+                              _imageFile!,
+                              width: 130,
+                              height: 130,
+                              fit: BoxFit.contain,
+                            ),
+                    ),
+                  ),
+                  TextButton.icon(
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return SizedBox(
+                                height: 100,
+                                child: Column(
+                                  children: [
+                                    TextButton.icon(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          selectImage(
+                                              imageSource: ImageSource.camera);
+                                        },
+                                        icon: const Icon(UniconsLine.camera),
+                                        label:
+                                            const Text('Select from Camera')),
+                                    TextButton.icon(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          selectImage(
+                                              imageSource: ImageSource.gallery);
+                                        },
+                                        icon: const Icon(UniconsLine.picture),
+                                        label:
+                                            const Text('Select from Gallery'))
+                                  ],
+                                ),
+                              );
+                            });
+                      },
+                      icon: const Icon(
+                        UniconsLine.camera,
+                        color: Colors.grey,
+                      ),
+                      label: Text(
+                        'Select Profile Picture',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(color: Colors.grey),
+                      )),
+
                   const SizedBox(height: 90),
                   Container(
                     margin: const EdgeInsets.only(left: 10),

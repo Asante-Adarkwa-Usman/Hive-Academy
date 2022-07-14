@@ -106,8 +106,9 @@ class HomeView extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
                                           child: CachedNetworkImage(
-                                            imageUrl:
-                                                userProfile['profile_pic'],
+                                            imageUrl: userProfile[
+                                                    'profile_pic'] ??
+                                                "https://cdn-icons-png.flaticon.com/512/747/747376.png",
                                             placeholder: (context, url) =>
                                                 const CircleAvatar(
                                               backgroundColor: Colors.amber,
