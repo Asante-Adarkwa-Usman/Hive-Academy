@@ -6,6 +6,7 @@ import 'package:hive_academy/shared_widgets/hexagon_button.dart';
 import 'package:hive_academy/shared_widgets/primary_button.dart';
 import 'package:hive_academy/shared_widgets/custom_text_form_field.dart';
 import 'package:hive_academy/utils/image_cropper.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hive_academy/route/route.dart' as router;
 import 'package:unicons/unicons.dart';
@@ -22,17 +23,20 @@ class _RegisterViewState extends State<RegisterView> {
   bool _passwordVisible = false;
   String view = "name";
   final ImagePicker _imagePicker = ImagePicker();
-
-  File? _imageFile;
+  String _imageFile = '';
 
   Future selectImage({ImageSource imageSource = ImageSource.camera}) async {
     XFile? selectedFile = await _imagePicker.pickImage(source: imageSource);
 
-    var croppedFile = await myImageCropper(selectedFile!.path);
-
-    setState(() {
-      _imageFile = croppedFile as File?;
-    });
+    if (selectedFile != null) {
+      final croppedFile = await myImageCropper(selectedFile.path);
+      if (croppedFile != null) {
+        setState(() {
+          _imageFile = croppedFile.path;
+        });
+      }
+    }
+    print(_imageFile);
   }
 
   @override
@@ -70,19 +74,15 @@ class _RegisterViewState extends State<RegisterView> {
                   Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(90),
-                      child: _imageFile == null
+                      child: _imageFile == ''
                           ? Image.asset(
                               'assets/images/user.png',
                               width: 130,
                               height: 130,
                               fit: BoxFit.contain,
                             )
-                          : Image.file(
-                              _imageFile!,
-                              width: 130,
-                              height: 130,
-                              fit: BoxFit.contain,
-                            ),
+                          : Image.file(File(_imageFile),
+                              width: 130, height: 130, fit: BoxFit.fill),
                     ),
                   ),
                   TextButton.icon(
@@ -91,7 +91,7 @@ class _RegisterViewState extends State<RegisterView> {
                             context: context,
                             builder: (context) {
                               return SizedBox(
-                                height: 100,
+                                height: 150,
                                 child: Column(
                                   children: [
                                     TextButton.icon(
@@ -117,16 +117,14 @@ class _RegisterViewState extends State<RegisterView> {
                               );
                             });
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         UniconsLine.camera,
-                        color: Colors.grey,
+                        color: Theme.of(context).primaryColorDark,
                       ),
                       label: Text(
                         'Select Profile Picture',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Colors.grey),
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColorDark),
                       )),
 
                   const SizedBox(height: 90),

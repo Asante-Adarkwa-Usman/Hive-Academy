@@ -13,14 +13,14 @@ Future<CroppedFile?> myImageCropper(String filePath) async {
     ],
     uiSettings: [
       AndroidUiSettings(
-          toolbarTitle: 'My Cropper',
-          toolbarColor: Colors.black,
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.deepOrange,
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false),
       IOSUiSettings(
-        minimumAspectRatio: 1.0,
-      )
+        title: 'Cropper',
+      ),
     ],
   );
 }
