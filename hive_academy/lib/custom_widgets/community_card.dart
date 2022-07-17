@@ -19,7 +19,7 @@ class CommunityCard extends StatelessWidget {
       onTap: onTap,
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.43,
-        height: MediaQuery.of(context).size.height * 0.20,
+        height: MediaQuery.of(context).size.height * 0.22,
         child: Card(
           color: cardColor,
           // shape: RoundedRectangleBorder(
