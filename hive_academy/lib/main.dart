@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       ),
       home: SplashScreenView(
         duration: 4000,
-        imageSize: 400,
+        imageSize: 600,
         navigateRoute: const OnboardingView(),
         pageRouteTransition: PageRouteTransition.SlideTransition,
         imageSrc: "assets/images/hiveLogo.png",

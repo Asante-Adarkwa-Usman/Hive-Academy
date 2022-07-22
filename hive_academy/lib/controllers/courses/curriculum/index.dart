@@ -22,13 +22,13 @@ class CourseCurriculumController extends GetxController {
   @override
   void onClose() {}
   List<ExpandedItemClass> generateItems(int? courseLength) {
-    //var courses = _coursesController.courses;
+   
     return List.generate(courseLength!, (int index) {
       return ExpandedItemClass(
-          // headerValue: courses[0]['curriculum'][index]['lessons'][0]['name'],
-          // expandedValue: courses[0]['curriculum'][index]['lessons'][0]['name']
-          headerValue: 'This is the header for the course',
-          body: 'This is the details for the course',
+          headerValue: _coursesController.courses[0]['curriculum'][index]
+              ['lessons'][0]['name'],
+          body: _coursesController.courses[0]['curriculum'][index]['lessons'][0]
+              ['description'],
           isExpanded: false.obs);
     });
   }

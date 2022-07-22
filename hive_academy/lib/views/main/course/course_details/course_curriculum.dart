@@ -12,7 +12,7 @@ class CourseCurriculum extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var courses = _coursesController.courses;
+   // var courses = _coursesController.courses;
     return SingleChildScrollView(
         child: Container(
       margin: const EdgeInsets.only(top: 20, bottom: 20),
@@ -24,9 +24,11 @@ class CourseCurriculum extends StatelessWidget {
           children: _coursesCurriculumController.courseItems
               .map<ExpansionPanel>((ExpandedItemClass courseItems) {
             return ExpansionPanel(
+                canTapOnHeader: true,
                 headerBuilder: ((context, isExpanded) {
                   return ListTile(
-                    title: Text(courseItems.headerValue!),
+                    title: Text(courseItems.headerValue!,
+                        style: const TextStyle(fontWeight: FontWeight.w700)),
                   );
                 }),
                 body: ListTile(

@@ -227,9 +227,9 @@ class _LoginViewState extends State<LoginView> {
                     alignment: Alignment.bottomLeft,
                     margin: const EdgeInsets.only(left: 20),
                     child: Image.asset(
-                      'assets/images/logo.png',
-                      height: MediaQuery.of(context).size.height * .20,
-                      width: MediaQuery.of(context).size.width * 0.20,
+                      'assets/images/hiveLogo.png',
+                      height: MediaQuery.of(context).size.height * .25,
+                      width: MediaQuery.of(context).size.width * 0.22,
                     ),
                   ),
                 ],
